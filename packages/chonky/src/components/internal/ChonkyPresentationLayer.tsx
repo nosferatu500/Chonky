@@ -20,7 +20,6 @@ import { elementIsInsideButton } from '../../util/helpers';
 import { makeGlobalChonkyStyles } from '../../util/styles';
 import { useContextMenuTrigger } from '../external/FileContextMenu-hooks';
 import { DnDFileListDragLayer } from '../file-list/DnDFileListDragLayer';
-import { HotkeyListener } from './HotkeyListener';
 
 export interface ChonkyPresentationLayerProps {}
 
@@ -49,18 +48,6 @@ export const ChonkyPresentationLayer: React.FC<ChonkyPresentationLayerProps> = (
         [dispatch, clearSelectionOnOutsideClick]
     );
 
-    // Generate necessary components
-    const hotkeyListenerComponents = useMemo(
-        () =>
-            fileActionIds.map(actionId => (
-                <HotkeyListener
-                    key={`file-action-listener-${actionId}`}
-                    fileActionId={actionId}
-                />
-            )),
-        [fileActionIds]
-    );
-
     const dndContextAvailable = useDndContextAvailable();
     const showContextMenu = useContextMenuTrigger();
 
@@ -69,7 +56,6 @@ export const ChonkyPresentationLayer: React.FC<ChonkyPresentationLayerProps> = (
         <ClickAwayListener onClickAway={handleClickAway}>
             <Box className={classes.chonkyRoot} onContextMenu={showContextMenu}>
                 {!dndDisabled && dndContextAvailable && <DnDFileListDragLayer />}
-                {hotkeyListenerComponents}
                 {children ? children : null}
             </Box>
         </ClickAwayListener>

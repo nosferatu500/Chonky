@@ -27,13 +27,9 @@ export const DefaultFileActions = [
     ChonkyActions.SelectAllFiles,
     ChonkyActions.ClearSelection,
     ChonkyActions.EnableListView,
-    // TODO: Don't enable until compact view is fully supported
-    // ChonkyActions.EnableCompactView,
     ChonkyActions.EnableGridView,
     ChonkyActions.SortFilesByName,
     ChonkyActions.SortFilesBySize,
     ChonkyActions.SortFilesByDate,
-    ChonkyActions.ToggleHiddenFiles,
-    ChonkyActions.ToggleShowFoldersFirst,
     ChonkyActions.FocusSearchInput,
 ];

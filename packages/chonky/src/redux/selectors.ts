@@ -122,7 +122,7 @@ const getSortedFileIds = createSelector(
         getSortOrder,
         makeGetFiles(getFileIds),
         makeGetAction(getSortActionId),
-        makeGetOptionValue(OptionIds.ShowFoldersFirst, false),
+        makeGetOptionValue(OptionIds.ShowFoldersFirst, true),
     ],
     (fileIds, sortOrder, files, sortAction, showFolderFirst) => {
         if (!sortAction) {
@@ -170,7 +170,7 @@ const getSearchFilteredFileIds = createSelector(
         searchString ? searcher.search(searchString).map(f => f.id) : cleanFileIds
 );
 const getHiddenFileIdMap = createSelector(
-    [getSearchFilteredFileIds, makeGetFiles(getCleanFileIds), makeGetOptionValue(OptionIds.ShowHiddenFiles)],
+    [getSearchFilteredFileIds, makeGetFiles(getCleanFileIds), makeGetOptionValue(OptionIds.ShowHiddenFiles, true)],
     (searchFilteredFileIds, cleanFiles, showHiddenFiles) => {
         const searchFilteredFileIdsSet = new Set(searchFilteredFileIds);
         const hiddenFileIdMap: any = {};

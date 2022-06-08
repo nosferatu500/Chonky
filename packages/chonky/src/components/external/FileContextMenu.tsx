@@ -5,15 +5,12 @@
  */
 
 import React, { ReactElement, useEffect, useMemo } from 'react';
-import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ListSubheader from '@material-ui/core/ListSubheader';
 import Menu from '@material-ui/core/Menu';
 
 import { reduxActions } from '../../redux/reducers';
 import { selectContextMenuConfig, selectContextMenuItems } from '../../redux/selectors';
-import { getI18nId, I18nNamespace } from '../../util/i18n';
 import { important, makeGlobalChonkyStyles } from '../../util/styles';
 import { useContextMenuDismisser } from './FileContextMenu-hooks';
 import { SmartToolbarDropdownButton } from './ToolbarDropdownButton';
@@ -28,15 +25,6 @@ export const FileContextMenu: React.FC<FileContextMenuProps> = React.memo(() => 
             dispatch(reduxActions.setContextMenuMounted(false));
         };
     }, [dispatch]);
-
-    const intl = useIntl();
-    const browserMenuShortcutString = intl.formatMessage(
-        {
-            id: getI18nId(I18nNamespace.FileContextMenu, 'browserMenuShortcut'),
-            defaultMessage: 'Browser menu: {shortcut}',
-        },
-        { shortcut: <strong>Alt + Right Click</strong> }
-    );
 
     const contextMenuConfig = useSelector(selectContextMenuConfig);
     const contextMenuItems = useSelector(selectContextMenuItems);
@@ -88,9 +76,6 @@ export const FileContextMenu: React.FC<FileContextMenuProps> = React.memo(() => 
             classes={{ list: classes.contextMenuList }}
         >
             {contextMenuItemComponents}
-            <ListSubheader component="div" className={classes.browserMenuTooltip}>
-                {browserMenuShortcutString}
-            </ListSubheader>
         </Menu>
     );
 });

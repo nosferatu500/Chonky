@@ -9,7 +9,6 @@ import { FileViewMode } from '../../types/file-view.types';
 import { FileHelper } from '../../util/file-helper';
 import { makeGlobalChonkyStyles } from '../../util/styles';
 import { ClickableWrapper, ClickableWrapperProps } from '../internal/ClickableWrapper';
-import { CompactEntry } from './CompactEntry';
 import { DnDFileEntry } from './DnDFileEntry';
 import { useFileClickHandlers } from './FileEntry-hooks';
 import { GridEntry } from './GridEntry';
@@ -54,7 +53,6 @@ export const SmartFileEntry: React.FC<SmartFileEntryProps> = React.memo(({ fileI
 
     let EntryComponent: React.FC<FileEntryProps>;
     if (fileViewMode === FileViewMode.List) EntryComponent = ListEntry;
-    else if (fileViewMode === FileViewMode.Compact) EntryComponent = CompactEntry;
     else EntryComponent = GridEntry;
 
     return dndDisabled ? (

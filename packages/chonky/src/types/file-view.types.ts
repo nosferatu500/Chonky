@@ -1,6 +1,5 @@
 export enum FileViewMode {
     List = 'list',
-    Compact = 'compact',
     Grid = 'grid',
 }
 
@@ -10,7 +9,7 @@ export type FileViewConfigList = {
 };
 
 export type FileViewConfigGrid = {
-    mode: FileViewMode.Compact | FileViewMode.Grid;
+    mode: FileViewMode.Grid;
     entryWidth: number;
     entryHeight: number;
 };

@@ -229,7 +229,6 @@ export const EssentialActions = {
     OpenParentFolder: defineFileAction(
         {
             id: 'open_parent_folder',
-            hotkeys: ['backspace'],
             button: {
                 name: 'Go up a directory',
                 toolbar: true,

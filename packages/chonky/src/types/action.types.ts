@@ -26,12 +26,6 @@ export interface FileAction {
      */
     fileFilter?: FileFilter;
     /**
-     * List of hotkeys that should trigger this action, defined using `hotkey-js`
-     * notation.
-     * @see https://www.npmjs.com/package/hotkeys-js
-     */
-    hotkeys?: string[] | readonly string[];
-    /**
      * When button is defined and `toolbar` or `contextMenu` is set to `true`, a
      * button will be added to the relevant UI component. Clicking on this button
      * will active this action. The appearance of the button will change based on

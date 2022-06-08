@@ -18,7 +18,6 @@ export const DefaultActions = {
     OpenSelection: defineFileAction(
         {
             id: 'open_selection',
-            hotkeys: ['enter'],
             requiresSelection: true,
             fileFilter: FileHelper.isOpenable,
             button: {
@@ -43,7 +42,6 @@ export const DefaultActions = {
      */
     SelectAllFiles: defineFileAction({
         id: 'select_all_files',
-        hotkeys: ['ctrl+a'],
         button: {
             name: 'Select all files',
             toolbar: true,
@@ -66,7 +64,6 @@ export const DefaultActions = {
      */
     ClearSelection: defineFileAction({
         id: 'clear_selection',
-        hotkeys: ['escape'],
         button: {
             name: 'Clear selection',
             toolbar: true,
@@ -92,25 +89,6 @@ export const DefaultActions = {
             name: 'Switch to List view',
             toolbar: true,
             icon: ChonkyIconName.list,
-            iconOnly: true,
-        },
-    } as const),
-    /**
-     * Action that enables Compact view. Note that compact view is still
-     * experimental and should not be used in production.
-     */
-    EnableCompactView: defineFileAction({
-        // TODO: Don't enable until compact view is fully supported
-        id: 'enable_compact_view',
-        fileViewConfig: {
-            mode: FileViewMode.Compact,
-            entryHeight: 40,
-            entryWidth: 220,
-        },
-        button: {
-            name: 'Switch to Compact view',
-            toolbar: true,
-            icon: ChonkyIconName.compact,
             iconOnly: true,
         },
     } as const),
@@ -164,44 +142,11 @@ export const DefaultActions = {
         },
     } as const),
     /**
-     * Action that toggles whether hidden files are shown to the user or not.
-     */
-    ToggleHiddenFiles: defineFileAction({
-        id: 'toggle_hidden_files',
-        hotkeys: ['ctrl+h'],
-        option: {
-            id: OptionIds.ShowHiddenFiles,
-            defaultValue: true,
-        },
-        button: {
-            name: 'Show hidden files',
-            toolbar: true,
-            group: 'Options',
-        },
-    } as const),
-    /**
-     * Action that toggles whether folders should appear before files regardless of
-     * current sort function.
-     */
-    ToggleShowFoldersFirst: defineFileAction({
-        id: 'toggle_show_folders_first',
-        option: {
-            id: OptionIds.ShowFoldersFirst,
-            defaultValue: true,
-        },
-        button: {
-            name: 'Show folders first',
-            toolbar: true,
-            group: 'Options',
-        },
-    } as const),
-    /**
      * Action that focuses the search input when it is dispatched.
      */
     FocusSearchInput: defineFileAction(
         {
             id: 'focus_search_input',
-            hotkeys: ['ctrl+f'],
         } as const,
         ({ getReduxState }) => {
             const focusSearchInput = selectFocusSearchInput(getReduxState());
