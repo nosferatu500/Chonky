@@ -61,23 +61,34 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = React.memo(props => {
         [classes.activeButton]: !!active,
     });
     return (
-        <Button
-            className={className}
-            onClick={onClick}
-            style={{ borderColor: "white" }}
-            title={tooltip ? tooltip : text}
-            disabled={disabled || !onClick}
-            icon={iconComponent}
-        >
-            {!dropdown && text && !iconOnly && <span>{text}</span>}
+        <>
             {
-                dropdown &&
-                <Button style={{ borderColor: "white" }}>
-                    {text}
-                    <DownOutlined className={classes.iconDropdown} />
-                </Button>
+                dropdown ?
+                    <Button
+                        className={className}
+                        style={{ borderColor: "white" }}
+                        title={tooltip ? tooltip : text}
+                        disabled={disabled || !onClick}
+                        onClick={onClick}
+                    >
+                        {text}
+                        <DownOutlined className={classes.iconDropdown} />
+                    </Button>
+                    :
+                    <Button
+                        className={className}
+                        onClick={onClick}
+                        style={{ borderColor: "white" }}
+                        title={tooltip ? tooltip : text}
+                        disabled={disabled || !onClick}
+                        icon={iconComponent}
+                    >
+                        {!dropdown && text && !iconOnly && <span>{text}</span>}
+                    </Button>
+
             }
-        </Button>
+        </>
+
     );
 });
 

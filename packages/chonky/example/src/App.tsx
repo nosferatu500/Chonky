@@ -4,7 +4,6 @@ import {
   ChonkyFileActionData,
   FileArray,
   FileBrowser,
-  FileContextMenu,
   FileData,
   FileHelper,
   FileList,
@@ -90,7 +89,6 @@ function App() {
                 <FileNavbar />
                 <FileToolbar />
                 <FileList />
-                <FileContextMenu />
             </FileBrowser>
         </div>
     );

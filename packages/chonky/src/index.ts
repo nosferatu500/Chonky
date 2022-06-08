@@ -6,7 +6,6 @@ export { FileBrowser } from './components/external/FileBrowser';
 export { FileNavbar } from './components/external/FileNavbar';
 export { FileToolbar } from './components/external/FileToolbar';
 export { FileList } from './components/file-list/FileList';
-export { FileContextMenu } from './components/external/FileContextMenu';
 export { FullFileBrowser } from './components/external/FullFileBrowser';
 
 export { ChonkyActions, DefaultFileActions, OptionIds } from './action-definitions';
