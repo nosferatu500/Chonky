@@ -164,10 +164,28 @@ const getSearchFilteredFileIds = createSelector(
     (cleanFileIds, searchString, searcher) =>
         searchString ? searcher.search(searchString).map(f => f.id) : cleanFileIds
 );
+const getHiddenFileIdMap = createSelector(
+    [getSearchFilteredFileIds, makeGetFiles(getCleanFileIds), makeGetOptionValue(OptionIds.ShowHiddenFiles, true)],
+    (searchFilteredFileIds, cleanFiles, showHiddenFiles) => {
+        const searchFilteredFileIdsSet = new Set(searchFilteredFileIds);
+        const hiddenFileIdMap: any = {};
+        cleanFiles.forEach(file => {
+            if (!file) return;
+            else if (!searchFilteredFileIdsSet.has(file.id)) {
+                // Hidden by seach
+                hiddenFileIdMap[file.id] = true;
+            } else if (!showHiddenFiles && FileHelper.isHidden(file)) {
+                // Hidden by options
+                hiddenFileIdMap[file.id] = true;
+            }
+        });
+        return hiddenFileIdMap;
+    }
+);
 const getDisplayFileIds = createSelector(
-    [getSortedFileIds],
+    [getSortedFileIds, getHiddenFileIdMap],
     /** Returns files that will actually be shown to the user. */
-    (sortedFileIds) => sortedFileIds
+    (sortedFileIds, hiddenFileIdMap) => sortedFileIds.filter(id => !id || !hiddenFileIdMap[id])
 );
 const getLastClickIndex = createSelector(
     [_getLastClick, getSortedFileIds],

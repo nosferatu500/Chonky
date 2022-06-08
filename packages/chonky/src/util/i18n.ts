@@ -38,6 +38,7 @@ export const defaultFormatters: ChonkyFormatters = {
     ): Nullable<string> => {
         const safeModDate = FileHelper.getModDate(file);
         if (safeModDate) {
+            // @ts-ignore
             return new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'long' }).format(safeModDate)
         } else {
             return null;

@@ -1,16 +1,15 @@
 {
-  "name": "chonky-icon-fontawesome",
-  "version": "2.3.2",
+  "name": "@nosferatu500/chonky-icon-fontawesome",
+  "version": "3.0.0",
   "description": "FontAwesome icon component for Chonky file browser",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=16"
   },
   "scripts": {
     "start": "tsdx watch",
@@ -20,6 +19,7 @@
     "prepare": "tsdx build"
   },
   "peerDependencies": {
+    "@nosferatu500/chonky": "3",
     "react": ">=17"
   },
   "prettier": {
@@ -32,6 +32,7 @@
   },
   "module": "dist/chonky-icon-fontawesome.esm.js",
   "devDependencies": {
+    "@nosferatu500/chonky": "^3.0.0",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
     "react": "^17.0.2",
@@ -44,8 +45,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-brands-svg-icons": "5.13.1",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
-    "@fortawesome/react-fontawesome": "^0.1.13",
-    "@nosferatu500/chonky": "./packages/chonky/dist/."
+    "@fortawesome/react-fontawesome": "^0.1.13"
   },
   "homepage": "https://chonky.io/",
   "author": {
@@ -53,12 +53,18 @@
     "email": "tim.kuzh@gmail.com",
     "url": "https://foxypanda.me/"
   },
+  "contributors": [
+    "Vitalii Shvetsov"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TimboKZ/Chonky.git"
+    "url": "git+https://github.com/nosferatu500/Chonky.git"
   },
   "bugs": {
-    "url": "https://github.com/TimboKZ/Chonky/issues"
+    "url": "https://github.com/nosferatu500/Chonky/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "file",

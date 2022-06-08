@@ -12,7 +12,7 @@ import {
   FileToolbar,
   setChonkyDefaults,
 } from '@nosferatu500/chonky';
-import { ChonkyIconFA } from 'chonky-icon-fontawesome';
+import { ChonkyIconFA } from '@nosferatu500/chonky-icon-fontawesome';
 import DemoFsMap from './demoData.json';
 
 setChonkyDefaults({ iconComponent: ChonkyIconFA });
