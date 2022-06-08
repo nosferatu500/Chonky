@@ -4,25 +4,17 @@
  * @license MIT
  */
 
-import Menu from '@material-ui/core/Menu';
-import React, { useCallback, useMemo } from 'react';
+import { DownOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Menu } from 'antd';
+import React, { useMemo } from 'react';
 
 import { FileActionGroup } from '../../types/action-menus.types';
-import { important, makeGlobalChonkyStyles } from '../../util/styles';
-import { ToolbarButton } from './ToolbarButton';
 import { SmartToolbarDropdownButton } from './ToolbarDropdownButton';
 
 export type ToolbarDropdownProps = FileActionGroup;
 
 export const ToolbarDropdown: React.FC<ToolbarDropdownProps> = React.memo(props => {
     const { name, fileActionIds } = props;
-    const [anchor, setAnchor] = React.useState<null | HTMLElement>(null);
-
-    const handleClick = useCallback(
-        (event: React.MouseEvent<HTMLButtonElement>) => setAnchor(event.currentTarget),
-        [setAnchor]
-    );
-    const handleClose = useCallback(() => setAnchor(null), [setAnchor]);
 
     const menuItemComponents = useMemo(
         () =>
@@ -30,35 +22,17 @@ export const ToolbarDropdown: React.FC<ToolbarDropdownProps> = React.memo(props 
                 <SmartToolbarDropdownButton
                     key={`menu-item-${id}`}
                     fileActionId={id}
-                    onClickFollowUp={handleClose}
                 />
             )),
-        [fileActionIds, handleClose]
+        [fileActionIds]
     );
 
-    const classes = useStyles();
     return (
-        <>
-            <ToolbarButton text={name} onClick={handleClick} dropdown={true} />
-            <Menu
-                autoFocus
-                keepMounted
-                elevation={2}
-                anchorEl={anchor}
-                onClose={handleClose}
-                open={Boolean(anchor)}
-                transitionDuration={150}
-                classes={{ list: classes.dropdownList }}
-            >
-                {menuItemComponents}
-            </Menu>
-        </>
+        <Dropdown overlay={<Menu>{menuItemComponents}</Menu>}>
+            <Button style={{ borderColor: "white" }}>
+                {name}
+                <DownOutlined />
+            </Button>
+        </Dropdown>
     );
 });
-
-const useStyles = makeGlobalChonkyStyles(() => ({
-    dropdownList: {
-        paddingBottom: important(0),
-        paddingTop: important(0),
-    },
-}));
