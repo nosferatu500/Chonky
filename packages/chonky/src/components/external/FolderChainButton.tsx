@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { ChonkyIconName } from '../../types/icons.types';
 import { c, important, makeLocalChonkyStyles } from '../../util/styles';
@@ -33,7 +33,7 @@ export const FolderChainButton: React.FC<FolderChainButtonProps> = React.memo(
                 : file?.folderChainIcon;
 
         return (
-            <div className={classes.buttonContainer} ref={null}>
+            <div className={classes.buttonContainer}>
                 <ToolbarButton
                     icon={icon}
                     className={className}

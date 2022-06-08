@@ -4,7 +4,9 @@
  * @license MIT
  */
 
-import Button from '@material-ui/core/Button';
+import { Button } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+
 import React, { useContext } from 'react';
 import { Nullable } from 'tsdef';
 
@@ -45,12 +47,11 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = React.memo(props => {
 
     const iconComponent =
         icon || iconOnly ? (
-            <div className={iconOnly ? '' : classes.iconWithText}>
-                <ChonkyIcon
-                    icon={icon ? icon : ChonkyIconName.fallbackIcon}
-                    fixedWidth={true}
-                />
-            </div>
+            <ChonkyIcon
+                className={classes.iconWithText}
+                icon={icon ? icon : ChonkyIconName.fallbackIcon}
+                fixedWidth={true}
+            />
         ) : null;
 
     const className = c({
@@ -63,19 +64,19 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = React.memo(props => {
         <Button
             className={className}
             onClick={onClick}
+            style={{ borderColor: "white" }}
             title={tooltip ? tooltip : text}
             disabled={disabled || !onClick}
+            icon={iconComponent}
         >
-            {iconComponent}
-            {text && !iconOnly && <span>{text}</span>}
-            {dropdown && (
-                <div className={classes.iconDropdown}>
-                    <ChonkyIcon
-                        icon={icon ? icon : ChonkyIconName.dropdown}
-                        fixedWidth={true}
-                    />
-                </div>
-            )}
+            {!dropdown && text && !iconOnly && <span>{text}</span>}
+            {
+                dropdown &&
+                <Button style={{ borderColor: "white" }}>
+                    {text}
+                    <DownOutlined className={classes.iconDropdown} />
+                </Button>
+            }
         </Button>
     );
 });
@@ -90,6 +91,7 @@ const useStyles = makeGlobalChonkyStyles(theme => ({
         height: theme.toolbar.size,
         paddingBottom: important(0),
         paddingTop: important(0),
+        backgroundColor: important("#fff"),
     },
     iconWithText: {
         marginRight: 8,
