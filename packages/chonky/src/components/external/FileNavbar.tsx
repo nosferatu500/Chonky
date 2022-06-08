@@ -24,9 +24,8 @@ export const FileNavbar: React.FC<FileNavbarProps> = React.memo(() => {
         for (let i = 0; i < folderChainItems.length; ++i) {
             const key = `folder-chain-${i}`;
             const component = (
-                <Breadcrumb.Item>
+                <Breadcrumb.Item key={key}>
                     <FolderChainButton
-                        key={key}
                         first={i === 0}
                         current={i === folderChainItems.length - 1}
                         item={folderChainItems[i]}

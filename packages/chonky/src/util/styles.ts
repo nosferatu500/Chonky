@@ -1,4 +1,3 @@
-import { Theme as MuiTheme } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import { createUseStyles } from 'react-jss';
 import { DeepPartial } from 'tsdef';
@@ -53,6 +52,18 @@ export const lightTheme = {
         iconBorderRadius: 5,
         fontSize: 14,
     },
+
+    palette: {
+        divider: "rgba(0, 0, 0, 0.12)",
+        text: {
+            primary: "rgba(0, 0, 0, 0.87)",
+            hint: "rgba(0, 0, 0, 0.6)",
+            disabled: "rgba(0, 0, 0, 0.38)",
+        },
+        background: {
+            paper: "#fff",
+        },
+    }
 };
 
 export type ChonkyTheme = typeof lightTheme;
@@ -75,12 +86,12 @@ export const getStripeGradient = (colorOne: string, colorTwo: string) =>
     ')';
 
 export const makeLocalChonkyStyles = <C extends string = string>(
-    styles: (theme: ChonkyTheme & MuiTheme) => any
+    styles: (theme: ChonkyTheme) => any
     // @ts-ignore
 ): any => createUseStyles<ChonkyTheme, C>(styles);
 
 export const makeGlobalChonkyStyles = <C extends string = string>(
-    makeStyles: (theme: ChonkyTheme & MuiTheme) => any
+    makeStyles: (theme: ChonkyTheme) => any
 ) => {
     const selectorMapping = {};
     const makeGlobalStyles = (theme: ChonkyTheme) => {

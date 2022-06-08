@@ -1,7 +1,3 @@
-import {
-    createMuiTheme,
-    ThemeProvider as MuiThemeProvider,
-} from '@material-ui/core/styles';
 import merge from 'deepmerge';
 import React, { ReactNode, useMemo } from 'react';
 import { ThemeProvider } from 'react-jss';
@@ -44,14 +40,7 @@ export const FileBrowser = React.forwardRef<
     const store = useChonkyStore(chonkyInstanceId);
 
     const theme = useMemo(() => {
-        const muiTheme = createMuiTheme({
-            palette: { type: darkMode ? 'dark' : 'light' },
-        });
-        const combinedTheme = merge(
-            muiTheme,
-            merge(lightTheme, darkMode ? darkThemeOverride : {})
-        );
-        return combinedTheme;
+        return merge(lightTheme, darkMode ? darkThemeOverride : {});
     }, [darkMode]);
 
     const chonkyComps = (
@@ -65,17 +54,15 @@ export const FileBrowser = React.forwardRef<
         <ChonkyFormattersContext.Provider value={defaultFormatters}>
             <ReduxProvider store={store}>
                 <ThemeProvider theme={theme}>
-                    <MuiThemeProvider theme={theme}>
-                        <ChonkyIconContext.Provider
-                            value={
-                                iconComponent ??
-                                defaultConfig.iconComponent ??
-                                ChonkyIconPlaceholder
-                            }
-                        >
-                            {chonkyComps}
-                        </ChonkyIconContext.Provider>
-                    </MuiThemeProvider>
+                    <ChonkyIconContext.Provider
+                        value={
+                            iconComponent ??
+                            defaultConfig.iconComponent ??
+                            ChonkyIconPlaceholder
+                        }
+                    >
+                        {chonkyComps}
+                    </ChonkyIconContext.Provider>
                 </ThemeProvider>
             </ReduxProvider>
         </ChonkyFormattersContext.Provider>
