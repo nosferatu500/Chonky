@@ -62,7 +62,6 @@ const useStyles = makeGlobalChonkyStyles(theme => ({
         height: important(theme.toolbar.size),
         minHeight: important('auto'),
         minWidth: important('auto'),
-        padding: important(20),
     },
     icon: {
         fontSize: important(theme.toolbar.fontSize),

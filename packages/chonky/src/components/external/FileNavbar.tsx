@@ -4,8 +4,7 @@
  * @license MIT
  */
 
-import Box from '@material-ui/core/Box';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import { Row, Breadcrumb } from 'antd';
 import React, { ReactElement, useMemo } from 'react';
 
 import { ChonkyActions } from '../../action-definitions/index';
@@ -14,7 +13,7 @@ import { useFolderChainItems } from './FileNavbar-hooks';
 import { FolderChainButton } from './FolderChainButton';
 import { SmartToolbarButton } from './ToolbarButton';
 
-export interface FileNavbarProps {}
+export interface FileNavbarProps { }
 
 export const FileNavbar: React.FC<FileNavbarProps> = React.memo(() => {
     const classes = useStyles();
@@ -25,12 +24,14 @@ export const FileNavbar: React.FC<FileNavbarProps> = React.memo(() => {
         for (let i = 0; i < folderChainItems.length; ++i) {
             const key = `folder-chain-${i}`;
             const component = (
-                <FolderChainButton
-                    key={key}
-                    first={i === 0}
-                    current={i === folderChainItems.length - 1}
-                    item={folderChainItems[i]}
-                />
+                <Breadcrumb.Item>
+                    <FolderChainButton
+                        key={key}
+                        first={i === 0}
+                        current={i === folderChainItems.length - 1}
+                        item={folderChainItems[i]}
+                    />
+                </Breadcrumb.Item>
             );
             components.push(component);
         }
@@ -38,17 +39,12 @@ export const FileNavbar: React.FC<FileNavbarProps> = React.memo(() => {
     }, [folderChainItems]);
 
     return (
-        <Box className={classes.navbarWrapper}>
-            <Box className={classes.navbarContainer}>
-                <SmartToolbarButton fileActionId={ChonkyActions.OpenParentFolder.id} />
-                <Breadcrumbs
-                    className={classes.navbarBreadcrumbs}
-                    classes={{ separator: classes.separator }}
-                >
-                    {folderChainComponents}
-                </Breadcrumbs>
-            </Box>
-        </Box>
+        <Row className={classes.navbarWrapper}>
+            <SmartToolbarButton fileActionId={ChonkyActions.OpenParentFolder.id} />
+            <Breadcrumb className={classes.navbarBreadcrumbs}>
+                {folderChainComponents}
+            </Breadcrumb>
+        </Row>
     );
 });
 
@@ -56,21 +52,8 @@ const useStyles = makeGlobalChonkyStyles(theme => ({
     navbarWrapper: {
         paddingBottom: theme.margins.rootLayoutMargin,
     },
-    navbarContainer: {
-        display: 'flex',
-    },
-    upDirectoryButton: {
-        fontSize: important(theme.toolbar.fontSize),
-        height: theme.toolbar.size,
-        width: theme.toolbar.size,
-        padding: '0px !important',
-    },
     navbarBreadcrumbs: {
         fontSize: important(theme.toolbar.fontSize),
         flexGrow: 100,
-    },
-    separator: {
-        marginRight: important(4),
-        marginLeft: important(4),
     },
 }));

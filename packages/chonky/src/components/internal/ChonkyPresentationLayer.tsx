@@ -4,53 +4,21 @@
  * @license MIT
  */
 
-import Box from '@material-ui/core/Box';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import React, { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Card } from 'antd';
 
-import { reduxActions } from '../../redux/reducers';
-import {
-    selectClearSelectionOnOutsideClick,
-} from '../../redux/selectors';
-import { elementIsInsideButton } from '../../util/helpers';
+import React from 'react';
 import { makeGlobalChonkyStyles } from '../../util/styles';
-import { useContextMenuTrigger } from '../external/FileContextMenu-hooks';
 
-export interface ChonkyPresentationLayerProps {}
+export interface ChonkyPresentationLayerProps { }
 
 export const ChonkyPresentationLayer: React.FC<ChonkyPresentationLayerProps> = ({
     children,
 }) => {
-    const dispatch = useDispatch();
-    const clearSelectionOnOutsideClick = useSelector(
-        selectClearSelectionOnOutsideClick
-    );
-
-    // Deal with clicks outside of Chonky
-    const handleClickAway = useCallback(
-        (event: React.MouseEvent<Document>) => {
-            if (!clearSelectionOnOutsideClick || elementIsInsideButton(event.target)) {
-                // We only clear out the selection on outside click if the click target
-                // was not a button. We don't want to clear out the selection when a
-                // button is clicked because Chonky users might want to trigger some
-                // selection-related action on that button click.
-                return;
-            }
-            dispatch(reduxActions.clearSelection());
-        },
-        [dispatch, clearSelectionOnOutsideClick]
-    );
-
-    const showContextMenu = useContextMenuTrigger();
-
     const classes = useStyles();
     return (
-        <ClickAwayListener onClickAway={handleClickAway}>
-            <Box className={classes.chonkyRoot} onContextMenu={showContextMenu}>
-                {children ? children : null}
-            </Box>
-        </ClickAwayListener>
+        <Card className={classes.chonkyRoot} style={{ padding: "0px" }}>
+            {children ? children : null}
+        </Card>
     );
 };
 

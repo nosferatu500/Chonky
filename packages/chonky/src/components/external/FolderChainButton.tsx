@@ -33,23 +33,18 @@ export const FolderChainButton: React.FC<FolderChainButtonProps> = React.memo(
                 : file?.folderChainIcon;
 
         return (
-            <div className={classes.buttonContainer}>
-                <ToolbarButton
-                    icon={icon}
-                    className={className}
-                    text={text}
-                    disabled={disabled}
-                    onClick={onClick}
-                />
-            </div>
+            <ToolbarButton
+                icon={icon}
+                className={className}
+                text={text}
+                disabled={disabled}
+                onClick={onClick}
+            />
         );
     }
 );
 
 const useStyles = makeLocalChonkyStyles(theme => ({
-    buttonContainer: {
-        position: 'relative',
-    },
     baseBreadcrumb: {
         color: () => {
             let color = theme.palette.text.primary;
