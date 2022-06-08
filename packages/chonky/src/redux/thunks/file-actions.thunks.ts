@@ -7,7 +7,7 @@ import { ChonkyThunk } from '../../types/redux.types';
 import { SortOrder } from '../../types/sort.types';
 import { sanitizeInputArray } from '../files-transforms';
 import { reduxActions } from '../reducers';
-import { selectCleanFileIds, selectFileMap, selectHiddenFileIdMap, selectSelectionMap } from '../selectors';
+import { selectCleanFileIds, selectFileMap, selectSelectionMap } from '../selectors';
 
 /**
  * Merges multiple file action arrays into one while removing duplicates
@@ -134,13 +134,11 @@ export const thunkApplySelectionTransform = (action: FileAction): ChonkyThunk =>
 
     const state = getState();
     const prevSelection = new Set<string>(Object.keys(selectSelectionMap(state)));
-    const hiddenFileIds = new Set<string>(Object.keys(selectHiddenFileIdMap(state)));
 
     const newSelection = selectionTransform({
         prevSelection,
         fileIds: selectCleanFileIds(state),
         fileMap: selectFileMap(state),
-        hiddenFileIds,
     });
     if (!newSelection) return;
 

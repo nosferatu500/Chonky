@@ -40,7 +40,6 @@ export type RootState = {
 
     // Derivative files
     sortedFileIds: Nullable<string>[];
-    hiddenFileIdMap: FileIdTrueMap;
 
     // Search
     focusSearchInput: Nullable<() => void>;

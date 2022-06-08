@@ -8,7 +8,6 @@ import Menu from '@material-ui/core/Menu';
 import React, { useCallback, useMemo } from 'react';
 
 import { FileActionGroup } from '../../types/action-menus.types';
-import { useLocalizedFileActionGroup } from '../../util/i18n';
 import { important, makeGlobalChonkyStyles } from '../../util/styles';
 import { ToolbarButton } from './ToolbarButton';
 import { SmartToolbarDropdownButton } from './ToolbarDropdownButton';
@@ -37,11 +36,10 @@ export const ToolbarDropdown: React.FC<ToolbarDropdownProps> = React.memo(props 
         [fileActionIds, handleClose]
     );
 
-    const localizedName = useLocalizedFileActionGroup(name);
     const classes = useStyles();
     return (
         <>
-            <ToolbarButton text={localizedName} onClick={handleClick} dropdown={true} />
+            <ToolbarButton text={name} onClick={handleClick} dropdown={true} />
             <Menu
                 autoFocus
                 keepMounted

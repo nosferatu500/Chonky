@@ -13,7 +13,6 @@ import { useParamSelector } from '../../redux/store';
 import { ChonkyIconName } from '../../types/icons.types';
 import { CustomVisibilityState } from '../../types/action.types';
 import { useFileActionProps, useFileActionTrigger } from '../../util/file-actions';
-import { useLocalizedFileActionStrings } from '../../util/i18n';
 import { ChonkyIconContext } from '../../util/icon-helper';
 import { c, important, makeGlobalChonkyStyles } from '../../util/styles';
 
@@ -120,7 +119,6 @@ export const SmartToolbarButton: React.FC<SmartToolbarButtonProps> = React.memo(
         const action = useParamSelector(selectFileActionData, fileActionId);
         const triggerAction = useFileActionTrigger(fileActionId);
         const { icon, active, disabled } = useFileActionProps(fileActionId);
-        const { buttonName, buttonTooltip } = useLocalizedFileActionStrings(action);
 
         if (!action) return null;
         const { button } = action;
@@ -129,8 +127,8 @@ export const SmartToolbarButton: React.FC<SmartToolbarButtonProps> = React.memo(
 
         return (
             <ToolbarButton
-                text={buttonName}
-                tooltip={buttonTooltip}
+                text={action.button?.name || ""}
+                tooltip={action.button?.tooltip || ""}
                 icon={icon}
                 iconOnly={button.iconOnly}
                 active={active}

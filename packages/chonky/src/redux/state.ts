@@ -25,7 +25,6 @@ export const initialRootState: RootState = {
     cleanFileIds: [],
 
     sortedFileIds: [],
-    hiddenFileIdMap: {},
 
     focusSearchInput: null,
     searchString: '',

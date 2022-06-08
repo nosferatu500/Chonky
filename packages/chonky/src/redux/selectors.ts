@@ -39,9 +39,6 @@ export const selectCleanFileIds = (state: RootState) => state.cleanFileIds;
 export const selectFileData = (fileId: Nullable<string>) => (state: RootState) =>
     fileId ? selectFileMap(state)[fileId] : null;
 
-export const selectHiddenFileIdMap = (state: RootState) => state.hiddenFileIdMap;
-export const selectHiddenFileCount = (state: RootState) => Object.keys(selectHiddenFileIdMap(state)).length;
-
 export const selectFocusSearchInput = (state: RootState) => state.focusSearchInput;
 export const selectSearchString = (state: RootState) => state.searchString;
 
@@ -169,28 +166,10 @@ const getSearchFilteredFileIds = createSelector(
     (cleanFileIds, searchString, searcher) =>
         searchString ? searcher.search(searchString).map(f => f.id) : cleanFileIds
 );
-const getHiddenFileIdMap = createSelector(
-    [getSearchFilteredFileIds, makeGetFiles(getCleanFileIds), makeGetOptionValue(OptionIds.ShowHiddenFiles, true)],
-    (searchFilteredFileIds, cleanFiles, showHiddenFiles) => {
-        const searchFilteredFileIdsSet = new Set(searchFilteredFileIds);
-        const hiddenFileIdMap: any = {};
-        cleanFiles.forEach(file => {
-            if (!file) return;
-            else if (!searchFilteredFileIdsSet.has(file.id)) {
-                // Hidden by seach
-                hiddenFileIdMap[file.id] = true;
-            } else if (!showHiddenFiles && FileHelper.isHidden(file)) {
-                // Hidden by options
-                hiddenFileIdMap[file.id] = true;
-            }
-        });
-        return hiddenFileIdMap;
-    }
-);
 const getDisplayFileIds = createSelector(
-    [getSortedFileIds, getHiddenFileIdMap],
+    [getSortedFileIds],
     /** Returns files that will actually be shown to the user. */
-    (sortedFileIds, hiddenFileIdMap) => sortedFileIds.filter(id => !id || !hiddenFileIdMap[id])
+    (sortedFileIds) => sortedFileIds
 );
 const getLastClickIndex = createSelector(
     [_getLastClick, getSortedFileIds],
@@ -223,7 +202,6 @@ export const selectors = {
     getSortedFileIds,
     getSearcher,
     getSearchFilteredFileIds,
-    getHiddenFileIdMap,
     getDisplayFileIds,
     getLastClickIndex,
 

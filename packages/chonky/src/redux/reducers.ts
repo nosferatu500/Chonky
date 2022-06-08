@@ -74,16 +74,6 @@ const reducers = {
     setSortedFileIds(state: RootState, action: PayloadAction<Nullable<string>[]>) {
         state.sortedFileIds = action.payload;
     },
-    setHiddenFileIds(state: RootState, action: PayloadAction<FileIdTrueMap>) {
-        state.hiddenFileIdMap = action.payload;
-
-        // Cleanup selection
-        for (const selectedFileId of Object.keys(state.selectionMap)) {
-            if (state.hiddenFileIdMap[selectedFileId]) {
-                delete state.selectionMap[selectedFileId];
-            }
-        }
-    },
     setFocusSearchInput(state: RootState, action: PayloadAction<Nullable<() => void>>) {
         state.focusSearchInput = action.payload;
     },

@@ -102,7 +102,6 @@ export type FileSelectionTransform = (data: {
     prevSelection: Set<string>;
     fileIds: ReadonlyArray<string>;
     fileMap: Readonly<FileMap>;
-    hiddenFileIds: Set<string>;
 }) => Nullable<Set<string>>;
 
 export type FileActionEffect<Action extends FileAction = any> = (data: {

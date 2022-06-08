@@ -49,12 +49,12 @@ export const DefaultActions = {
             group: 'Actions',
             icon: ChonkyIconName.selectAllFiles,
         },
-        selectionTransform: (({ fileIds, hiddenFileIds }) => {
+        selectionTransform: (({ fileIds }) => {
             const newSelection = new Set<string>();
             fileIds.map(fileId => {
                 // We don't need to check if file is selectable because Chonky does
                 // it own checks internally.
-                if (!hiddenFileIds.has(fileId)) newSelection.add(fileId);
+                newSelection.add(fileId);
             });
             return newSelection;
         }) as FileSelectionTransform,

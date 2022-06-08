@@ -15,7 +15,6 @@ import { useParamSelector } from '../../redux/store';
 import { ChonkyIconName } from '../../types/icons.types';
 import { CustomVisibilityState } from '../../types/action.types';
 import { useFileActionProps, useFileActionTrigger } from '../../util/file-actions';
-import { useLocalizedFileActionStrings } from '../../util/i18n';
 import { ChonkyIconContext } from '../../util/icon-helper';
 import { c, important, makeGlobalChonkyStyles } from '../../util/styles';
 
@@ -91,7 +90,6 @@ export const SmartToolbarDropdownButton = React.forwardRef(
         const action = useParamSelector(selectFileActionData, fileActionId);
         const triggerAction = useFileActionTrigger(fileActionId);
         const { icon, active, disabled } = useFileActionProps(fileActionId);
-        const { buttonName } = useLocalizedFileActionStrings(action);
 
         // Combine external click handler with internal one
         const handleClick = useCallback(() => {
@@ -107,7 +105,7 @@ export const SmartToolbarDropdownButton = React.forwardRef(
         return (
             <ToolbarDropdownButton
                 ref={ref}
-                text={buttonName}
+                text={action.button?.name || ""}
                 icon={icon}
                 onClick={handleClick}
                 active={active}

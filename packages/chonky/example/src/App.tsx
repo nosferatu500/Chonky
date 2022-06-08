@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useState } from 'react'
-import logo from './logo.svg'
 import {
   ChonkyActions,
   ChonkyFileActionData,
@@ -12,7 +11,7 @@ import {
   FileNavbar,
   FileToolbar,
   setChonkyDefaults,
-} from 'chonky';
+} from '@nosferatu500/chonky';
 import { ChonkyIconFA } from 'chonky-icon-fontawesome';
 import DemoFsMap from './demoData.json';
 
@@ -67,8 +66,6 @@ export const useFileActionHandler = (
                   return;
               }
           }
-
-        //   showActionNotification(data);
       },
       [setCurrentFolderId]
   );

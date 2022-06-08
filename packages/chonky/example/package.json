@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "chonky": "file:../dist/.",
+    "@nosferatu500/chonky": "file:../dist/.",
     "chonky-icon-fontawesome": "file:../../chonky-icon-fontawesome/dist/.",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"

@@ -154,14 +154,6 @@ export interface FileBrowserProps {
     darkMode?: boolean;
 
     /**
-     * Configuration for the `react-intl` i18n library. Chonky provides some default
-     * values, e.g. `locale` and `defaultLocale` are set to `en`. Any settings you
-     * specify here will override the defaults.
-     * @see https://formatjs.io/docs/react-intl/components
-     */
-    i18n?: I18nConfig;
-
-    /**
      * Define listener for on scroll events on file lists
      */
     onScroll?: (e: UIEvent<HTMLDivElement>) => void;

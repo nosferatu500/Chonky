@@ -20,7 +20,7 @@
     "prepare": "tsdx build"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": ">=17"
   },
   "prettier": {
     "trailingComma": "es5",
@@ -45,7 +45,7 @@
     "@fortawesome/free-brands-svg-icons": "5.13.1",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "@fortawesome/react-fontawesome": "^0.1.13",
-    "chonky": "./packages/chonky/dist/."
+    "@nosferatu500/chonky": "./packages/chonky/dist/."
   },
   "homepage": "https://chonky.io/",
   "author": {
@@ -66,5 +66,18 @@
     "file-dialog",
     "file-browser",
     "react-component"
-  ]
+  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
