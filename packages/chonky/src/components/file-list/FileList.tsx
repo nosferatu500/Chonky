@@ -34,9 +34,9 @@ export const FileList: React.FC<FileListProps> = React.memo((props: FileListProp
             if (displayFileIds.length === 0) {
                 return <FileListEmpty width={width} height={viewConfig.entryHeight} />;
             } else if (viewConfig.mode === FileViewMode.List) {
-                return <ListContainer width={width} height={height} />;
+                return <ListContainer width={width} height={height + 150} />;
             } else {
-                return <GridContainer width={width} height={height} />;
+                return <GridContainer width={width} height={height + 150} />;
             }
         },
         [displayFileIds, viewConfig]

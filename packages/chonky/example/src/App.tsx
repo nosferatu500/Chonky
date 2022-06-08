@@ -76,7 +76,7 @@ function App() {
     const folderChain = useFolderChain(currentFolderId);
     const handleFileAction = useFileActionHandler(setCurrentFolderId);
     return (
-        <div style={{ height: 400 }}>
+        <div style={{ height: 500 }}>
             <FileBrowser
                 instanceId={"props.instanceId"}
                 files={files}
