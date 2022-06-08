@@ -7,7 +7,7 @@ import { useFileEntryHtmlProps, useFileEntryState } from './FileEntry-hooks';
 import { FileEntryName } from './FileEntryName';
 import { FileEntryState, GridEntryPreviewFile, GridEntryPreviewFolder } from './GridEntryPreview';
 
-export const GridEntry: React.FC<FileEntryProps> = React.memo(({ file, selected, focused, dndState }) => {
+export const GridEntry: React.FC<FileEntryProps> = React.memo(({ file, selected, focused }) => {
     const isDirectory = FileHelper.isDirectory(file);
     const entryState = useFileEntryState(file, selected, focused);
 
@@ -22,13 +22,11 @@ export const GridEntry: React.FC<FileEntryProps> = React.memo(({ file, selected,
                 <GridEntryPreviewFolder
                     className={classes.gridFileEntryPreview}
                     entryState={entryState}
-                    dndState={dndState}
                 />
             ) : (
                 <GridEntryPreviewFile
                     className={classes.gridFileEntryPreview}
                     entryState={entryState}
-                    dndState={dndState}
                 />
             )}
             <div className={classes.gridFileEntryNameContainer}>

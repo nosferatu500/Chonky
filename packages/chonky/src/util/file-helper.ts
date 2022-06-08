@@ -39,25 +39,6 @@ export class FileHelper {
         return !!file && file.selectable !== false;
     }
 
-    public static isDraggable(file: Nullable<FileData>): file is FileData {
-        // File & folders are draggable by default, `null` is not
-        return !!file && file.draggable !== false;
-    }
-
-    public static isDroppable(file: Nullable<FileData>): file is FileData {
-        // Folders are droppable by default, files are not
-        if (!file) return false;
-        if (file.isDir && file.droppable !== false) return true;
-        return file.droppable === true;
-    }
-
-    public static isDndOpenable(file: Nullable<FileData>): file is FileData {
-        // Folders are DnD openable by default, files are not
-        if (!FileHelper.isOpenable(file)) return false;
-        if (file.isDir && file.dndOpenable !== false) return true;
-        return file.dndOpenable === true;
-    }
-
     public static getModDate(file: Nullable<FileData>): Nullable<Date> {
         if (!file || file.modDate === null || file.modDate === undefined) return null;
         return FileHelper.parseDate(file.modDate);

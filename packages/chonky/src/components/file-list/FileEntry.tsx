@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Nullable } from 'tsdef';
 
-import { selectFileData, selectIsDnDDisabled, selectIsFileSelected } from '../../redux/selectors';
+import { selectFileData, selectIsFileSelected } from '../../redux/selectors';
 import { useParamSelector } from '../../redux/store';
-import { DndEntryState, FileEntryProps } from '../../types/file-list.types';
+import { FileEntryProps } from '../../types/file-list.types';
 import { FileViewMode } from '../../types/file-view.types';
 import { FileHelper } from '../../util/file-helper';
 import { makeGlobalChonkyStyles } from '../../util/styles';
 import { ClickableWrapper, ClickableWrapperProps } from '../internal/ClickableWrapper';
-import { DnDFileEntry } from './DnDFileEntry';
 import { useFileClickHandlers } from './FileEntry-hooks';
 import { GridEntry } from './GridEntry';
 import { ListEntry } from './ListEntry';
@@ -20,19 +18,12 @@ export interface SmartFileEntryProps {
     fileViewMode: FileViewMode;
 }
 
-const disabledDndState: DndEntryState = {
-    dndIsDragging: false,
-    dndIsOver: false,
-    dndCanDrop: false,
-};
-
 export const SmartFileEntry: React.FC<SmartFileEntryProps> = React.memo(({ fileId, displayIndex, fileViewMode }) => {
     const classes = useStyles();
 
     // Basic properties
     const file = useParamSelector(selectFileData, fileId);
     const selected = useParamSelector(selectIsFileSelected, fileId);
-    const dndDisabled = useSelector(selectIsDnDDisabled);
 
     // Clickable wrapper properties
     const fileClickHandlers = useFileClickHandlers(file, displayIndex);
@@ -45,7 +36,7 @@ export const SmartFileEntry: React.FC<SmartFileEntryProps> = React.memo(({ fileI
     };
 
     // File entry properties
-    const fileEntryProps: Omit<FileEntryProps, 'dndState'> = {
+    const fileEntryProps: FileEntryProps = {
         file,
         selected,
         focused,
@@ -55,18 +46,10 @@ export const SmartFileEntry: React.FC<SmartFileEntryProps> = React.memo(({ fileI
     if (fileViewMode === FileViewMode.List) EntryComponent = ListEntry;
     else EntryComponent = GridEntry;
 
-    return dndDisabled ? (
+    return (
         <ClickableWrapper {...clickableWrapperProps}>
-            <EntryComponent {...fileEntryProps} dndState={disabledDndState} />
+            <EntryComponent {...fileEntryProps} />
         </ClickableWrapper>
-    ) : (
-        <DnDFileEntry file={file}>
-            {dndState => (
-                <ClickableWrapper {...clickableWrapperProps}>
-                    <EntryComponent {...fileEntryProps} dndState={dndState} />
-                </ClickableWrapper>
-            )}
-        </DnDFileEntry>
     );
 });
 SmartFileEntry.displayName = 'SmartFileEntry';

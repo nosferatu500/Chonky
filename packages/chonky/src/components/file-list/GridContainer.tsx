@@ -8,12 +8,10 @@ import React, { CSSProperties, useCallback, useEffect, useMemo, useRef, useState
 import { useSelector } from 'react-redux';
 import { VariableSizeGrid } from 'react-window';
 
-import { ChonkyActions } from '../../action-definitions';
 import { selectFileViewConfig, selectors } from '../../redux/selectors';
 import { FileViewConfigGrid } from '../../types/file-view.types';
-import { RootState } from '../../types/redux.types';
 import { useInstanceVariable } from '../../util/hooks-helpers';
-import { makeGlobalChonkyStyles, useIsMobileBreakpoint } from '../../util/styles';
+import { makeGlobalChonkyStyles } from '../../util/styles';
 import { SmartFileEntry } from './FileEntry';
 
 export interface FileListGridProps {
@@ -29,29 +27,16 @@ interface GridConfig {
     columnWidth: number;
 }
 
-export const isMobileDevice = () => {
-    // noinspection JSDeprecatedSymbols
-    return typeof window.orientation !== 'undefined' || navigator.userAgent.indexOf('IEMobile') !== -1;
-};
-
 export const getGridConfig = (
     width: number,
     fileCount: number,
     viewConfig: FileViewConfigGrid,
-    isMobileBreakpoint: boolean
 ): GridConfig => {
-    const gutter = isMobileBreakpoint ? 5 : 8;
-    const scrollbar = isMobileDevice() ? 0 : 18;
+    const gutter = 8;
+    const scrollbar = 18;
 
-    let columnCount: number;
-    let columnWidth: number;
-    if (isMobileBreakpoint) {
-        columnCount = 2;
-        columnWidth = (width - gutter - scrollbar) / columnCount;
-    } else {
-        columnWidth = viewConfig.entryWidth;
-        columnCount = Math.max(1, Math.floor((width - scrollbar) / (columnWidth + gutter)));
-    }
+    let columnWidth = viewConfig.entryWidth;
+    let columnCount = Math.max(1, Math.floor((width - scrollbar) / (columnWidth + gutter)));
 
     const rowCount = Math.ceil(fileCount / columnCount);
 
@@ -72,17 +57,16 @@ export const GridContainer: React.FC<FileListGridProps> = React.memo(props => {
     const fileCount = useMemo(() => displayFileIds.length, [displayFileIds]);
 
     const gridRef = useRef<VariableSizeGrid>();
-    const isMobileBreakpoint = useIsMobileBreakpoint();
 
     // Whenever the grid config changes at runtime, we call a method on the
     // `VariableSizeGrid` handle to reset column width/row height cache.
     // !!! Note that we deliberately update the `gridRef` firsts and update the React
     //     state AFTER that. This is needed to avoid file entries jumping up/down.
-    const [gridConfig, setGridConfig] = useState(getGridConfig(width, fileCount, viewConfig, isMobileBreakpoint));
+    const [gridConfig, setGridConfig] = useState(getGridConfig(width, fileCount, viewConfig));
     const gridConfigRef = useRef(gridConfig);
     useEffect(() => {
         const oldConf = gridConfigRef.current;
-        const newConf = getGridConfig(width, fileCount, viewConfig, isMobileBreakpoint);
+        const newConf = getGridConfig(width, fileCount, viewConfig);
 
         gridConfigRef.current = newConf;
         if (gridRef.current) {
@@ -98,7 +82,7 @@ export const GridContainer: React.FC<FileListGridProps> = React.memo(props => {
         }
 
         setGridConfig(newConf);
-    }, [setGridConfig, gridConfigRef, isMobileBreakpoint, width, viewConfig, fileCount]);
+    }, [setGridConfig, gridConfigRef, width, viewConfig, fileCount]);
 
     const sizers = useMemo(() => {
         const gc = gridConfigRef;

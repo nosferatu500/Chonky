@@ -6,8 +6,8 @@ import {
 import { reduxThunks } from '../redux/thunks';
 import { thunkRequestFileAction } from '../redux/thunks/dispatchers.thunks';
 import {
-    ChangeSelectionPayload, EndDragNDropPayload, KeyboardClickFilePayload, MouseClickFilePayload,
-    MoveFilesPayload, OpenFileContextMenuPayload, OpenFilesPayload, StartDragNDropPayload
+    ChangeSelectionPayload, KeyboardClickFilePayload, MouseClickFilePayload,
+    OpenFileContextMenuPayload, OpenFilesPayload
 } from '../types/action-payloads.types';
 import { ChonkyIconName } from '../types/icons.types';
 import { FileHelper } from '../util/file-helper';
@@ -153,61 +153,6 @@ export const EssentialActions = {
             }
         }
     ),
-    /**
-     * Action that is dispatched when user starts dragging some file.
-     */
-    StartDragNDrop: defineFileAction(
-        {
-            id: 'start_drag_n_drop',
-            __payloadType: {} as StartDragNDropPayload,
-        } as const,
-        ({ payload, reduxDispatch, getReduxState }) => {
-            const file = payload.draggedFile;
-            if (!getIsFileSelected(getReduxState(), file)) {
-                if (FileHelper.isSelectable(file)) {
-                    reduxDispatch(
-                        reduxActions.selectFiles({
-                            fileIds: [file.id],
-                            reset: true,
-                        })
-                    );
-                }
-            }
-        }
-    ),
-    /**
-     * Action that is dispatched when user either cancels the drag & drop interaction,
-     * or drops a file somewhere.
-     */
-    EndDragNDrop: defineFileAction(
-        {
-            id: 'end_drag_n_drop',
-            __payloadType: {} as EndDragNDropPayload,
-        } as const,
-        ({ payload, reduxDispatch, getReduxState }) => {
-            if (getIsFileSelected(getReduxState(), payload.destination)) {
-                // Can't drop a selection into itself
-                return;
-            }
-
-            const { draggedFile, selectedFiles } = payload as EndDragNDropPayload;
-            const droppedFiles = selectedFiles.length > 0 ? selectedFiles : [draggedFile];
-            reduxDispatch(
-                thunkRequestFileAction(ChonkyActions.MoveFiles, {
-                    ...payload,
-                    files: droppedFiles,
-                })
-            );
-        }
-    ),
-    /**
-     * Action that is dispatched when user moves files from one folder to another,
-     * usually by dragging & dropping some files into the folder.
-     */
-    MoveFiles: defineFileAction({
-        id: 'move_files',
-        __payloadType: {} as MoveFilesPayload,
-    } as const),
     /**
      * Action that is dispatched when the selection changes for any reason.
      */

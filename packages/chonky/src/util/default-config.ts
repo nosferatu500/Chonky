@@ -10,8 +10,6 @@ export type ChonkyConfig = Pick<
     | 'doubleClickDelay'
     | 'disableSelection'
     | 'disableDefaultFileActions'
-    | 'disableDragAndDrop'
-    | 'disableDragAndDropProvider'
     | 'defaultSortActionId'
     | 'defaultFileViewActionId'
     | 'clearSelectionOnOutsideClick'
@@ -26,8 +24,6 @@ export const defaultConfig: ChonkyConfig = {
     doubleClickDelay: 300,
     disableSelection: false,
     disableDefaultFileActions: false,
-    disableDragAndDrop: false,
-    disableDragAndDropProvider: false,
     defaultSortActionId: ChonkyActions.SortFilesByName.id,
     defaultFileViewActionId: ChonkyActions.EnableGridView.id,
     clearSelectionOnOutsideClick: true,

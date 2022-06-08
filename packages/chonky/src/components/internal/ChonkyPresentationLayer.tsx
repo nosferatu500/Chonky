@@ -6,20 +6,16 @@
 
 import Box from '@material-ui/core/Box';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { reduxActions } from '../../redux/reducers';
 import {
     selectClearSelectionOnOutsideClick,
-    selectFileActionIds,
-    selectIsDnDDisabled,
 } from '../../redux/selectors';
-import { useDndContextAvailable } from '../../util/dnd-fallback';
 import { elementIsInsideButton } from '../../util/helpers';
 import { makeGlobalChonkyStyles } from '../../util/styles';
 import { useContextMenuTrigger } from '../external/FileContextMenu-hooks';
-import { DnDFileListDragLayer } from '../file-list/DnDFileListDragLayer';
 
 export interface ChonkyPresentationLayerProps {}
 
@@ -27,8 +23,6 @@ export const ChonkyPresentationLayer: React.FC<ChonkyPresentationLayerProps> = (
     children,
 }) => {
     const dispatch = useDispatch();
-    const fileActionIds = useSelector(selectFileActionIds);
-    const dndDisabled = useSelector(selectIsDnDDisabled);
     const clearSelectionOnOutsideClick = useSelector(
         selectClearSelectionOnOutsideClick
     );
@@ -48,14 +42,12 @@ export const ChonkyPresentationLayer: React.FC<ChonkyPresentationLayerProps> = (
         [dispatch, clearSelectionOnOutsideClick]
     );
 
-    const dndContextAvailable = useDndContextAvailable();
     const showContextMenu = useContextMenuTrigger();
 
     const classes = useStyles();
     return (
         <ClickAwayListener onClickAway={handleClickAway}>
             <Box className={classes.chonkyRoot} onContextMenu={showContextMenu}>
-                {!dndDisabled && dndContextAvailable && <DnDFileListDragLayer />}
                 {children ? children : null}
             </Box>
         </ClickAwayListener>

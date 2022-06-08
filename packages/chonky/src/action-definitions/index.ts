@@ -13,9 +13,6 @@ export const ChonkyActions = {
 export const EssentialFileActions = [
     ChonkyActions.MouseClickFile,
     ChonkyActions.KeyboardClickFile,
-    ChonkyActions.StartDragNDrop,
-    ChonkyActions.EndDragNDrop,
-    ChonkyActions.MoveFiles,
     ChonkyActions.ChangeSelection,
     ChonkyActions.OpenFiles,
     ChonkyActions.OpenParentFolder,

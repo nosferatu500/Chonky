@@ -5,7 +5,6 @@ import { ChonkyActions } from '../action-definitions/index';
 import { GenericFileActionHandler } from './action-handler.types';
 import { FileAction } from './action.types';
 import { FileArray } from './file.types';
-import { I18nConfig } from './i18n.types';
 import { ChonkyIconProps } from './icons.types';
 import { ThumbnailGenerator } from './thumbnails.types';
 
@@ -108,19 +107,6 @@ export interface FileBrowserProps {
      * array of default file action IDs that you want to disable.
      */
     disableDefaultFileActions?: boolean | string[];
-
-    /**
-     * The flag that completely disables drag & drop functionality for this instance
-     * of Chonky.
-     */
-    disableDragAndDrop?: boolean;
-
-    /**
-     * The flag that is used to disable `react-dnd` context provider inside of this
-     * instance of Chonky, while keeping other drag & drop functionality in tact.
-     * Useful when you want to provide your own `react-dnd` context.
-     */
-    disableDragAndDropProvider?: boolean;
 
     /**
      * The ID of the sort-selector-setting action to activate by default. This field can

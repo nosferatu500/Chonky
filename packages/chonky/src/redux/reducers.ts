@@ -7,7 +7,7 @@ import { FileActionMenuItem } from '../types/action-menus.types';
 import { FileAction, FileActionMap } from '../types/action.types';
 import { ContextMenuConfig } from '../types/context-menu.types';
 import { FileViewConfig } from '../types/file-view.types';
-import { FileArray, FileIdTrueMap, FileMap } from '../types/file.types';
+import { FileArray, FileMap } from '../types/file.types';
 import { OptionMap } from '../types/options.types';
 import { RootState } from '../types/redux.types';
 import { SortOrder } from '../types/sort.types';
@@ -130,9 +130,6 @@ const reducers = {
     },
     setDoubleClickDelay(state: RootState, action: PayloadAction<number>) {
         state.doubleClickDelay = action.payload;
-    },
-    setDisableDragAndDrop(state: RootState, action: PayloadAction<boolean>) {
-        state.disableDragAndDrop = action.payload;
     },
     setClearSelectionOnOutsideClick(state: RootState, action: PayloadAction<boolean>) {
         state.clearSelectionOnOutsideClick = action.payload;

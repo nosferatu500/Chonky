@@ -13,7 +13,6 @@ import { faPython } from '@fortawesome/free-brands-svg-icons/faPython';
 import { faRust } from '@fortawesome/free-brands-svg-icons/faRust';
 import { faUbuntu } from '@fortawesome/free-brands-svg-icons/faUbuntu';
 import { faWindows } from '@fortawesome/free-brands-svg-icons/faWindows';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons/faArrowDown';
 import { faBalanceScale } from '@fortawesome/free-solid-svg-icons/faBalanceScale';
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons/faBoxOpen';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
@@ -37,7 +36,6 @@ import { faFileImage } from '@fortawesome/free-solid-svg-icons/faFileImage';
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons/faFilePdf';
 import { faFileWord } from '@fortawesome/free-solid-svg-icons/faFileWord';
 import { faFilm } from '@fortawesome/free-solid-svg-icons/faFilm';
-import { faFistRaised } from '@fortawesome/free-solid-svg-icons/faFistRaised';
 import { faFolder } from '@fortawesome/free-solid-svg-icons/faFolder';
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons/faFolderOpen';
 import { faFolderPlus } from '@fortawesome/free-solid-svg-icons/faFolderPlus';
@@ -59,7 +57,6 @@ import { faTerminal } from '@fortawesome/free-solid-svg-icons/faTerminal';
 import { faTh } from '@fortawesome/free-solid-svg-icons/faTh';
 import { faThLarge } from '@fortawesome/free-solid-svg-icons/faThLarge';
 import { faThList } from '@fortawesome/free-solid-svg-icons/faThList';
-import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { faToggleOff } from '@fortawesome/free-solid-svg-icons/faToggleOff';
 import { faToggleOn } from '@fortawesome/free-solid-svg-icons/faToggleOn';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
@@ -74,11 +71,6 @@ const IconMap: { [iconName in ChonkyIconName]: any } = {
     [ChonkyIconName.loading]: faCircleNotch,
     [ChonkyIconName.dropdown]: faChevronDown,
     [ChonkyIconName.placeholder]: faMinus,
-
-    // File Actions: Drag & drop
-    [ChonkyIconName.dndDragging]: faFistRaised,
-    [ChonkyIconName.dndCanDrop]: faArrowDown,
-    [ChonkyIconName.dndCannotDrop]: faTimes,
 
     // File Actions: File operations
     [ChonkyIconName.openFiles]: faBoxOpen,

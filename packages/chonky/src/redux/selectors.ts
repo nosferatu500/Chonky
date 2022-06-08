@@ -15,7 +15,6 @@ export const selectInstanceId = (state: RootState) => state.instanceId;
 export const selectExternalFileActionHandler = (state: RootState) => state.externalFileActionHandler;
 
 export const selectFileActionMap = (state: RootState) => state.fileActionMap;
-export const selectFileActionIds = (state: RootState) => state.fileActionIds;
 export const selectFileActionData = (fileActionId: string) => (state: RootState) =>
     selectFileActionMap(state)[fileActionId];
 export const selectToolbarItems = (state: RootState) => state.toolbarItems;
@@ -72,7 +71,6 @@ export const selectOptionValue = (optionId: string) => (state: RootState) => sel
 
 export const selectThumbnailGenerator = (state: RootState) => state.thumbnailGenerator;
 export const selectDoubleClickDelay = (state: RootState) => state.doubleClickDelay;
-export const selectIsDnDDisabled = (state: RootState) => state.disableDragAndDrop;
 export const selectClearSelectionOnOutsideClick = (state: RootState) => state.clearSelectionOnOutsideClick;
 
 export const selectContextMenuMounted = (state: RootState) => state.contextMenuMounted;

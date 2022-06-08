@@ -63,7 +63,6 @@ export type RootState = {
     // Other settings
     thumbnailGenerator: Nullable<ThumbnailGenerator>;
     doubleClickDelay: number;
-    disableDragAndDrop: boolean;
     clearSelectionOnOutsideClick: boolean;
 
     // State to use inside effects

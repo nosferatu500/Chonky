@@ -1,5 +1,4 @@
 import { Theme as MuiTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import classnames from 'classnames';
 import { createUseStyles } from 'react-jss';
 import { DeepPartial } from 'tsdef';
@@ -28,23 +27,6 @@ export const lightTheme = {
         lineHeight: '30px', // `px` suffix is required for `line-height` fields to work
         fontSize: 15,
         buttonRadius: 4,
-    },
-
-    dnd: {
-        canDropColor: 'green',
-        cannotDropColor: 'red',
-        canDropMask: 'rgba(180, 235, 180, 0.75)',
-        cannotDropMask: 'rgba(235, 180, 180, 0.75)',
-        fileListCanDropMaskOne: 'rgba(180, 235, 180, 0.1)',
-        fileListCanDropMaskTwo: 'rgba(180, 235, 180, 0.2)',
-        fileListCannotDropMaskOne: 'rgba(235, 180, 180, 0.1)',
-        fileListCannotDropMaskTwo: 'rgba(235, 180, 180, 0.2)',
-    },
-
-    dragLayer: {
-        border: 'solid 2px #09f',
-        padding: '7px 10px',
-        borderRadius: 2,
     },
 
     fileList: {
@@ -81,32 +63,6 @@ export const darkThemeOverride: DeepPartial<ChonkyTheme> = {
         folderBackColorTint: 'rgba(50, 50, 50, 0.4)',
         folderFrontColorTint: 'rgba(50, 50, 50, 0.15)',
     },
-};
-
-export const mobileThemeOverride: DeepPartial<ChonkyTheme> = {
-    fontSizes: {
-        rootPrimary: 13,
-    },
-    margins: {
-        rootLayoutMargin: 4,
-    },
-    toolbar: {
-        size: 28,
-        lineHeight: '28px',
-        fontSize: 13,
-    },
-    gridFileEntry: {
-        fontSize: 13,
-    },
-    listFileEntry: {
-        propertyFontSize: 12,
-        iconFontSize: '1em',
-        fontSize: 13,
-    },
-};
-
-export const useIsMobileBreakpoint = () => {
-    return useMediaQuery('(max-width:480px)');
 };
 
 export const getStripeGradient = (colorOne: string, colorTwo: string) =>

@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 import Typography from '@material-ui/core/Typography';
 
-import { selectors, selectSelectionSize } from '../../redux/selectors';
+import { selectors } from '../../redux/selectors';
 import { important, makeGlobalChonkyStyles } from '../../util/styles';
 
 export interface ToolbarInfoProps {}
@@ -18,20 +18,11 @@ export const ToolbarInfo: React.FC<ToolbarInfoProps> = React.memo(() => {
     const classes = useStyles();
 
     const displayFileIds = useSelector(selectors.getDisplayFileIds);
-    const selectionSize = useSelector(selectSelectionSize);
 
     return (
         <div className={classes.infoContainer}>
             <Typography className={classes.infoText} variant="body1">
                 {displayFileIds.length > 1 || displayFileIds.length === 0 ? `${displayFileIds.length} items` : `${displayFileIds.length} item`}
-                {(selectionSize > 0) && (
-                    <span className={classes.extraInfoSpan}>
-                        (
-                        <span className={classes.selectionSizeText}>
-                            {`${selectionSize} selected`}
-                        </span>
-                    </span>
-                )}
             </Typography>
         </div>
     );

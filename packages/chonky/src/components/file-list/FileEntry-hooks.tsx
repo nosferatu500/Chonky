@@ -7,7 +7,6 @@ import { Nullable, Undefinable } from 'tsdef';
 import { ChonkyActions } from '../../action-definitions/index';
 import { selectThumbnailGenerator } from '../../redux/selectors';
 import { thunkRequestFileAction } from '../../redux/thunks/dispatchers.thunks';
-import { DndEntryState } from '../../types/file-list.types';
 import { FileData } from '../../types/file.types';
 import { ChonkyIconName } from '../../types/icons.types';
 import { FileHelper } from '../../util/file-helper';
@@ -50,18 +49,6 @@ export const useFileEntryState = (file: Nullable<FileData>, selected: boolean, f
             focused: !!focused,
         };
     }, [file, focused, iconData, selected, thumbnailLoading, thumbnailUrl]);
-};
-
-export const useDndIcon = (dndState: DndEntryState) => {
-    let dndIconName: Nullable<ChonkyIconName> = null;
-    if (dndState.dndIsOver) {
-        const showDropIcon = dndState.dndCanDrop;
-        dndIconName = showDropIcon ? ChonkyIconName.dndCanDrop : ChonkyIconName.dndCannotDrop;
-    } else if (dndState.dndIsDragging) {
-        dndIconName = ChonkyIconName.dndDragging;
-    }
-
-    return dndIconName;
 };
 
 export const useModifierIconComponents = (file: Nullable<FileData>) => {

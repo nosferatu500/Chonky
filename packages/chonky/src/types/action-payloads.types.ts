@@ -21,20 +21,6 @@ export interface KeyboardClickFilePayload {
     shiftKey: boolean;
 }
 
-export interface StartDragNDropPayload {
-    sourceInstanceId: string;
-    source: Nullable<FileData>;
-    draggedFile: FileData;
-    selectedFiles: FileData[];
-}
-
-export type EndDragNDropPayload = StartDragNDropPayload & {
-    destination: FileData;
-    copy: boolean;
-};
-
-export type MoveFilesPayload = EndDragNDropPayload & { files: FileData[] };
-
 export type ChangeSelectionPayload = { selection: Set<string> };
 
 export interface OpenFilesPayload {
