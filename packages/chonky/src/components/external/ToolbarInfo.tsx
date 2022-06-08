@@ -7,7 +7,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import Typography from '@material-ui/core/Typography';
+import { Typography } from "antd"
 
 import { selectors } from '../../redux/selectors';
 import { important, makeGlobalChonkyStyles } from '../../util/styles';
@@ -21,9 +21,9 @@ export const ToolbarInfo: React.FC<ToolbarInfoProps> = React.memo(() => {
 
     return (
         <div className={classes.infoContainer}>
-            <Typography className={classes.infoText} variant="body1">
+            <Typography.Text className={classes.infoText}>
                 {displayFileIds.length > 1 || displayFileIds.length === 0 ? `${displayFileIds.length} items` : `${displayFileIds.length} item`}
-            </Typography>
+            </Typography.Text>
         </div>
     );
 });
@@ -38,13 +38,5 @@ const useStyles = makeGlobalChonkyStyles(theme => ({
         fontSize: important(theme.toolbar.fontSize),
         marginLeft: important(12),
         height: theme.toolbar.size,
-    },
-    extraInfoSpan: {
-        marginRight: important(8),
-        marginLeft: important(8),
-        opacity: 0.8,
-    },
-    selectionSizeText: {
-        color: theme.colors.textActive,
     },
 }));
