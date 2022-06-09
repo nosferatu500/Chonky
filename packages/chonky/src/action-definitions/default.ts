@@ -1,81 +1,13 @@
 import { Nullable } from 'tsdef';
 
 import { selectFocusSearchInput } from '../redux/selectors';
-import { thunkRequestFileAction } from '../redux/thunks/dispatchers.thunks';
-import { FileSelectionTransform } from '../types/action.types';
 import { FileViewMode } from '../types/file-view.types';
 import { FileData } from '../types/file.types';
 import { ChonkyIconName } from '../types/icons.types';
-import { FileHelper } from '../util/file-helper';
 import { defineFileAction } from '../util/helpers';
-import { EssentialActions } from './essential';
 import { OptionIds } from './option-ids';
 
 export const DefaultActions = {
-    /**
-     * Action that can be used to open currently selected files.
-     */
-    OpenSelection: defineFileAction(
-        {
-            id: 'open_selection',
-            requiresSelection: true,
-            fileFilter: FileHelper.isOpenable,
-            button: {
-                name: 'Open selection',
-                toolbar: true,
-                contextMenu: true,
-                group: 'Actions',
-                icon: ChonkyIconName.openFiles,
-            },
-        } as const,
-        ({ state, reduxDispatch }) => {
-            reduxDispatch(
-                thunkRequestFileAction(EssentialActions.OpenFiles, {
-                    files: state.selectedFilesForAction!,
-                })
-            );
-            return undefined;
-        }
-    ),
-    /**
-     * Action that selects all files.
-     */
-    SelectAllFiles: defineFileAction({
-        id: 'select_all_files',
-        button: {
-            name: 'Select all files',
-            toolbar: true,
-            contextMenu: true,
-            group: 'Actions',
-            icon: ChonkyIconName.selectAllFiles,
-        },
-        selectionTransform: (({ fileIds }) => {
-            const newSelection = new Set<string>();
-            fileIds.map(fileId => {
-                // We don't need to check if file is selectable because Chonky does
-                // it own checks internally.
-                newSelection.add(fileId);
-            });
-            return newSelection;
-        }) as FileSelectionTransform,
-    } as const),
-    /**
-     * Action that clear the file selection.
-     */
-    ClearSelection: defineFileAction({
-        id: 'clear_selection',
-        button: {
-            name: 'Clear selection',
-            toolbar: true,
-            contextMenu: true,
-            group: 'Actions',
-            icon: ChonkyIconName.clearSelection,
-        },
-        selectionTransform: (({ prevSelection }) => {
-            if (prevSelection.size === 0) return null;
-            return new Set<string>();
-        }) as FileSelectionTransform,
-    } as const),
     /**
      * Action that enables List view.
      */

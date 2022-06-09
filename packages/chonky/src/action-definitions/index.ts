@@ -20,9 +20,6 @@ export const EssentialFileActions = [
 ];
 
 export const DefaultFileActions = [
-    ChonkyActions.OpenSelection,
-    ChonkyActions.SelectAllFiles,
-    ChonkyActions.ClearSelection,
     ChonkyActions.EnableListView,
     ChonkyActions.EnableGridView,
     ChonkyActions.SortFilesByName,

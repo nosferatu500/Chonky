@@ -44,63 +44,19 @@ export const EssentialActions = {
 
                 const disableSelection = selectDisableSelection(getReduxState());
                 if (FileHelper.isSelectable(payload.file) && !disableSelection) {
-                    if (payload.ctrlKey) {
-                        // Multiple selection
-                        reduxDispatch(
-                            reduxActions.toggleSelection({
-                                fileId: payload.file.id,
-                                exclusive: false,
-                            })
-                        );
-                        reduxDispatch(
-                            reduxActions.setLastClickIndex({
-                                index: payload.fileDisplayIndex,
-                                fileId: payload.file.id,
-                            })
-                        );
-                    } else if (payload.shiftKey) {
-                        // Range selection
-                        const lastClickIndex = selectors.getLastClickIndex(getReduxState());
-                        if (typeof lastClickIndex === 'number') {
-                            // We have the index of the previous click
-                            let rangeStart = lastClickIndex;
-                            let rangeEnd = payload.fileDisplayIndex;
-                            if (rangeStart > rangeEnd) {
-                                [rangeStart, rangeEnd] = [rangeEnd, rangeStart];
-                            }
-
-                            reduxDispatch(reduxThunks.selectRange({ rangeStart, rangeEnd }));
-                        } else {
-                            // Since we can't do a range selection, do a
-                            // multiple selection
-                            reduxDispatch(
-                                reduxActions.toggleSelection({
-                                    fileId: payload.file.id,
-                                    exclusive: false,
-                                })
-                            );
-                            reduxDispatch(
-                                reduxActions.setLastClickIndex({
-                                    index: payload.fileDisplayIndex,
-                                    fileId: payload.file.id,
-                                })
-                            );
-                        }
-                    } else {
-                        // Exclusive selection
-                        reduxDispatch(
-                            reduxActions.toggleSelection({
-                                fileId: payload.file.id,
-                                exclusive: true,
-                            })
-                        );
-                        reduxDispatch(
-                            reduxActions.setLastClickIndex({
-                                index: payload.fileDisplayIndex,
-                                fileId: payload.file.id,
-                            })
-                        );
-                    }
+                    // Exclusive selection
+                    reduxDispatch(
+                        reduxActions.toggleSelection({
+                            fileId: payload.file.id,
+                            exclusive: true,
+                        })
+                    );
+                    reduxDispatch(
+                        reduxActions.setLastClickIndex({
+                            index: payload.fileDisplayIndex,
+                            fileId: payload.file.id,
+                        })
+                    );
                 } else {
                     if (!payload.ctrlKey && !disableSelection) {
                         reduxDispatch(reduxActions.clearSelection());
