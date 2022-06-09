@@ -2,7 +2,7 @@ import merge from 'deepmerge';
 import React, { ReactNode, useMemo } from 'react';
 import { ThemeProvider } from 'react-jss';
 import { Provider as ReduxProvider } from 'react-redux';
-import shortid from 'shortid';
+import { nanoid } from 'nanoid';
 
 import { useChonkyStore } from '../../redux/store';
 import { FileBrowserHandle, FileBrowserProps } from '../../types/file-browser.types';
@@ -36,7 +36,7 @@ export const FileBrowser = React.forwardRef<
         defaultConfig.darkMode,
         'boolean'
     );
-    const chonkyInstanceId = useStaticValue(() => instanceId ?? shortid.generate());
+    const chonkyInstanceId = useStaticValue(() => instanceId ?? nanoid());
     const store = useChonkyStore(chonkyInstanceId);
 
     const theme = useMemo(() => {

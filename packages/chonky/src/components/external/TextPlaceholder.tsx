@@ -31,7 +31,8 @@ export const TextPlaceholder: React.FC<TextPlaceholderProps> = React.memo(props 
     );
 });
 
-const useStyles = makeLocalChonkyStyles(() => ({
+const useStyles = makeLocalChonkyStyles({
+    // @ts-ignore
     '@keyframes loading-placeholder': {
         '0%': { opacity: 0.2 },
         '50%': { opacity: 0.4 },
@@ -49,4 +50,4 @@ const useStyles = makeLocalChonkyStyles(() => ({
         maxWidth: '40%',
         minWidth: 20,
     },
-}));
+});

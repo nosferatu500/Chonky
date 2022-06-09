@@ -86,9 +86,9 @@ export const getStripeGradient = (colorOne: string, colorTwo: string) =>
     ')';
 
 export const makeLocalChonkyStyles = <C extends string = string>(
-    styles: (theme: ChonkyTheme) => any
+    theme: ChonkyTheme
     // @ts-ignore
-): any => createUseStyles<ChonkyTheme, C>(styles);
+): any => createUseStyles<ChonkyTheme, C>(theme);
 
 export const makeGlobalChonkyStyles = <C extends string = string>(
     makeStyles: (theme: ChonkyTheme) => any
