@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-import { faAdobe } from '@fortawesome/free-brands-svg-icons/faAdobe';
 import { faGitAlt } from '@fortawesome/free-brands-svg-icons/faGitAlt';
 import { faLinux } from '@fortawesome/free-brands-svg-icons/faLinux';
 import { faNodeJs } from '@fortawesome/free-brands-svg-icons/faNodeJs';
@@ -139,9 +138,6 @@ const IconMap: { [iconName in ChonkyIconName]: any } = {
 
     // Development tools file types
     [ChonkyIconName.git]: faGitAlt,
-
-    // Brands file types
-    [ChonkyIconName.adobe]: faAdobe,
 
     // Other program file types
     [ChonkyIconName.pdf]: faFilePdf,

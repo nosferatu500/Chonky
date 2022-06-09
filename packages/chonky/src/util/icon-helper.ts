@@ -409,9 +409,6 @@ const getIconTrie = () => {
         // Development tools file types
         [ChonkyIconName.git, ['.gitignore']],
 
-        // Brands file types
-        [ChonkyIconName.adobe, ['psd']],
-
         // Other program file types
         [ChonkyIconName.pdf, ['pdf']],
         [ChonkyIconName.excel, ['xls', 'xlsx']],
