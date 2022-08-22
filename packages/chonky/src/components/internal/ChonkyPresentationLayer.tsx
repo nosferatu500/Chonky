@@ -6,10 +6,10 @@
 
 import { Card } from 'antd';
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { makeGlobalChonkyStyles } from '../../util/styles';
 
-export interface ChonkyPresentationLayerProps { }
+export interface ChonkyPresentationLayerProps { children?: ReactNode }
 
 export const ChonkyPresentationLayer: React.FC<ChonkyPresentationLayerProps> = ({
     children,

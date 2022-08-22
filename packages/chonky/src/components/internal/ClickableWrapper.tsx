@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-import React, { useCallback } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { AnyObjectWithStringKeys } from 'tsdef';
 
 import { useClickHandler, useKeyDownHandler } from './ClickableWrapper-hooks';
@@ -28,6 +28,7 @@ export type KeyboardClickEventHandler = (event: KeyboardClickEvent) => void;
 export interface ClickableWrapperProps {
     wrapperTag: any;
     passthroughProps?: any;
+    children?: ReactNode;
 
     onSingleClick?: MouseClickEventHandler;
     onDoubleClick?: MouseClickEventHandler;
