@@ -10,14 +10,14 @@
   "dependencies": {
     "@nosferatu500/chonky": "file:../dist",
     "@nosferatu500/chonky-icon-fontawesome": "file:../../chonky-icon-fontawesome/dist",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.12",
-    "@types/react-dom": "^18.0.5",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^1.3.2",
-    "typescript": "^4.7.3",
-    "vite": "^2.9.10"
+    "typescript": "^4.7.4",
+    "vite": "^2.9.15"
   }
 }
