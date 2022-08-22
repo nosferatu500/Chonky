@@ -22,6 +22,7 @@ import { FileHelper } from './file-helper';
 export const useFileActionTrigger = (fileActionId: string) => {
     const dispatch = useDispatch();
     const fileAction = useParamSelector(selectFileActionData, fileActionId);
+    // @ts-ignore
     return useCallback(() => dispatch(thunkRequestFileAction(fileAction, undefined)), [
         dispatch,
         fileAction,

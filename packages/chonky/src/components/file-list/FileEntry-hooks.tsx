@@ -153,6 +153,7 @@ export const useFileClickHandlers = (file: Nullable<FileData>, displayIndex: num
             if (!file) return;
 
             dispatch(
+                // @ts-ignore
                 thunkRequestFileAction(ChonkyActions.MouseClickFile, {
                     clickType,
                     file,
@@ -170,6 +171,7 @@ export const useFileClickHandlers = (file: Nullable<FileData>, displayIndex: num
             if (!file) return;
 
             dispatch(
+                // @ts-ignore
                 thunkRequestFileAction(ChonkyActions.KeyboardClickFile, {
                     file,
                     fileDisplayIndex: displayIndex,

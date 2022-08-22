@@ -7,7 +7,7 @@ import { FileActionMenuItem } from './action-menus.types';
 import { FileAction, FileActionMap } from './action.types';
 import { ContextMenuConfig } from './context-menu.types';
 import { FileViewConfig } from './file-view.types';
-import { FileArray, FileIdTrueMap, FileMap } from './file.types';
+import { FileArray, FileMap } from './file.types';
 import { OptionMap } from './options.types';
 import { FileSelection } from './selection.types';
 import { SortOrder } from './sort.types';

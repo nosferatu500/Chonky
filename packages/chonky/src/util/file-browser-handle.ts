@@ -29,6 +29,7 @@ export const useFileBrowserHandle = (ref: React.Ref<FileBrowserHandle>) => {
                 payload: Action['__payloadType']
             ): Promise<void> {
                 return Promise.resolve(
+                    // @ts-ignore
                     dispatch(thunkRequestFileAction(action, payload))
                 ).then();
             },

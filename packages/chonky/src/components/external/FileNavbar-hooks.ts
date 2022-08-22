@@ -32,6 +32,7 @@ export const useFolderChainItems = (): FolderChainItem[] => {
                         ? undefined
                         : () =>
                               dispatch(
+                                // @ts-ignore
                                   thunkRequestFileAction(ChonkyActions.OpenFiles, {
                                       targetFile: file,
                                       files: [file],
