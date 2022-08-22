@@ -1,4 +1,4 @@
-import sort from 'fast-sort';
+import { sort } from 'fast-sort';
 import FuzzySearch from 'fuzzy-search';
 import { Nilable, Nullable } from 'tsdef';
 
@@ -148,8 +148,7 @@ const getSortedFileIds = createSelector(
         }
         if (sortFunctions.length === 0) return fileIds;
 
-        // We copy the array because `fast-sort` mutates it
-        const sortedFileIds = sort([...files])
+        const sortedFileIds = sort(files)
             .by(sortFunctions as any)
             .map(file => (file ? file.id : null));
         return sortedFileIds;
