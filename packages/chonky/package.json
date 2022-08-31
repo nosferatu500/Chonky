@@ -1,6 +1,6 @@
 {
   "name": "@nosferatu500/chonky",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "A File Browser component for React",
   "license": "MIT",
   "main": "dist/index.js",
@@ -31,15 +31,15 @@
   },
   "module": "dist/chonky.esm.js",
   "devDependencies": {
-    "@babel/core": "^7.18.10",
+    "@babel/core": "^7.18.13",
     "@testing-library/react": "^11.2.7",
     "@types/fuzzy-search": "^2.1.2",
-    "@types/react": "^18.0.17",
+    "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
     "@types/react-virtualized-auto-sizer": "^1.0.1",
     "@types/react-window": "^1.8.5",
     "@types/redux-watch": "^1.1.0",
-    "antd": "^4.22.7",
+    "antd": "^4.22.8",
     "babel-loader": "^8.2.5",
     "classnames": "^2.3.1",
     "nanoid": "^4.0.0",
@@ -48,7 +48,7 @@
     "tsdef": "^0.0.14",
     "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.2"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
