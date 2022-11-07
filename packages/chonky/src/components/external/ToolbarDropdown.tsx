@@ -57,7 +57,7 @@ export const ToolbarDropdown: React.FC<ToolbarDropdownProps> = React.memo(props 
     const menuItemComponents = fileActionIds.map(fileActionId => getMenuItem(fileActionId));
 
     return (
-        <Dropdown overlay={<Menu items={menuItemComponents} />}>
+        <Dropdown menu={{ items: menuItemComponents }}>
             <Button style={{ borderColor: "white" }}>
                 {name}
                 <DownOutlined />

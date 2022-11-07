@@ -1,4 +1,4 @@
-import filesize from 'filesize';
+import { filesize } from 'filesize';
 import { createContext, useContext, useMemo } from 'react';
 import { Nullable } from 'tsdef';
 
@@ -49,6 +49,7 @@ export const defaultFormatters: ChonkyFormatters = {
 
         const size = file.size;
         const sizeData = filesize(size, { bits: false, output: 'object' }) as any;
+
         if (sizeData.symbol === 'B') {
             return `${Math.round(sizeData.value / 10) / 100.0} KB`;
         } else if (sizeData.symbol === 'KB') {

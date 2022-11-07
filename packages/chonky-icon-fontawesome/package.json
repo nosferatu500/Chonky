@@ -1,6 +1,6 @@
 {
   "name": "@nosferatu500/chonky-icon-fontawesome",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "FontAwesome icon component for Chonky file browser",
   "license": "MIT",
   "main": "dist/index.js",
@@ -32,14 +32,14 @@
   },
   "module": "dist/chonky-icon-fontawesome.esm.js",
   "devDependencies": {
-    "@nosferatu500/chonky": "^3.2.0",
-    "@types/react": "^18.0.18",
-    "@types/react-dom": "^18.0.6",
+    "@nosferatu500/chonky": "~3.2.0",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsdx": "^0.14.1",
-    "tslib": "^2.4.0",
-    "typescript": "^4.8.2"
+    "tslib": "^2.4.1",
+    "typescript": "^4.8.4"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
