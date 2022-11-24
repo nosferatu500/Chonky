@@ -163,7 +163,7 @@ const useFileStyles = makeLocalChonkyStyles(theme => ({
         overflow: 'hidden',
     },
     fileIcon: {
-        transform: 'translateX(-50%) translateY(-50%)',
+        transform: 'translate3d(-50%, -50%, 0)',
         fontSize: theme.gridFileEntry.iconSize,
         opacity: (state: FileEntryState) => (state.thumbnailUrl && !state.focused ? 0 : 1),
         color: (state: FileEntryState) =>

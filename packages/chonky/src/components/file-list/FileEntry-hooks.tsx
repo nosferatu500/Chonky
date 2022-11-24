@@ -1,6 +1,7 @@
 import React, {
-    HTMLProps, useCallback, useContext, useEffect, useMemo, useRef, useState
+    HTMLProps, useCallback, useEffect, useMemo, useRef, useState
 } from 'react';
+import { Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nullable, Undefinable } from 'tsdef';
 
@@ -10,7 +11,7 @@ import { thunkRequestFileAction } from '../../redux/thunks/dispatchers.thunks';
 import { FileData } from '../../types/file.types';
 import { ChonkyIconName } from '../../types/icons.types';
 import { FileHelper } from '../../util/file-helper';
-import { ChonkyIconContext, ColorsDark, ColorsLight, useIconData } from '../../util/icon-helper';
+import { ColorsDark, ColorsLight, useIconData } from '../../util/icon-helper';
 import { Logger } from '../../util/logger';
 import { TextPlaceholder } from '../external/TextPlaceholder';
 import { KeyboardClickEvent, MouseClickEvent } from '../internal/ClickableWrapper';
@@ -51,54 +52,11 @@ export const useFileEntryState = (file: Nullable<FileData>, selected: boolean, f
     }, [file, focused, iconData, selected, thumbnailLoading, thumbnailUrl]);
 };
 
-export const useModifierIconComponents = (file: Nullable<FileData>) => {
-    const modifierIcons: ChonkyIconName[] = useMemo(() => {
-        const modifierIcons: ChonkyIconName[] = [];
-        if (FileHelper.isHidden(file)) modifierIcons.push(ChonkyIconName.hidden);
-        if (FileHelper.isSymlink(file)) modifierIcons.push(ChonkyIconName.symlink);
-        if (FileHelper.isEncrypted(file)) modifierIcons.push(ChonkyIconName.lock);
-        return modifierIcons;
-    }, [file]);
-    const ChonkyIcon = useContext(ChonkyIconContext);
-    const modifierIconComponents = useMemo(
-        () => modifierIcons.map((icon, index) => <ChonkyIcon key={`file-modifier-${index}`} icon={icon} />),
-        // For some reason ESLint marks `ChonkyIcon` as an unnecessary dependency,
-        // but we expect it can change at runtime so we disable the check.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [ChonkyIcon, modifierIcons]
-    );
-    return modifierIconComponents;
-};
-
-const _extname = (fileName: string) => {
-    const parts = fileName.split('.');
-    if (parts.length) {
-        return `.${parts[parts.length - 1]}`;
-    }
-    return '';
-};
-
-export const useFileNameComponent = (file: Nullable<FileData>) => {
+export const useFileNameComponent = (file: Nullable<FileData>, className: string) => {
     return useMemo(() => {
         if (!file) return <TextPlaceholder minLength={15} maxLength={20} />;
 
-        let name;
-        let extension = null;
-
-        const isDir = FileHelper.isDirectory(file);
-        if (isDir) {
-            name = file.name;
-        } else {
-            extension = file.ext ?? _extname(file.name);
-            name = file.name.substr(0, file.name.length - extension.length);
-        }
-
-        return (
-            <>
-                {name}
-                {extension && <span className="chonky-file-entry-description-title-extension">{extension}</span>}
-            </>
-        );
+        return <Typography.Text className={className} ellipsis>{file.name}</Typography.Text>
     }, [file]);
 };
 

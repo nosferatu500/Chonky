@@ -42,7 +42,7 @@ const useStyles = makeGlobalChonkyStyles(theme => ({
         fontSize: '1.2em',
     },
     fileListEmptyContent: {
-        transform: 'translateX(-50%) translateY(-50%)',
+        transform: 'translate3d(-50%, -50%, 0)',
         position: 'absolute',
         left: '50%',
         top: '50%',
