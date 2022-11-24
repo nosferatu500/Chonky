@@ -78,6 +78,7 @@ function App() {
     return (
         <div style={{ height: 500 }}>
             <FileBrowser
+                darkMode
                 instanceId={"props.instanceId"}
                 files={files}
                 folderChain={folderChain}

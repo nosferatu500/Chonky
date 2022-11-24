@@ -16,7 +16,7 @@ export const ChonkyPresentationLayer: React.FC<ChonkyPresentationLayerProps> = (
 }) => {
     const classes = useStyles();
     return (
-        <Card className={classes.chonkyRoot} style={{ padding: "0px" }}>
+        <Card className={classes.chonkyRoot}>
             {children ? children : null}
         </Card>
     );
@@ -26,7 +26,7 @@ const useStyles = makeGlobalChonkyStyles(theme => ({
     chonkyRoot: {
         backgroundColor: theme.palette.background.paper,
         border: `solid 1px ${theme.palette.divider}`,
-        padding: theme.margins.rootLayoutMargin,
+        padding: '0px',
         fontSize: theme.fontSizes.rootPrimary,
         color: theme.palette.text.primary,
         touchAction: 'manipulation', // Disabling zoom on double tap

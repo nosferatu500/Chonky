@@ -1,4 +1,3 @@
-import 'antd/dist/antd.css';
 import { GenericFileActionHandler, MapFileActionsToData } from './types/action-handler.types';
 import { ChonkyActionUnion } from './types/file-browser.types';
 

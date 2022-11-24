@@ -66,7 +66,7 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = React.memo(props => {
                 dropdown ?
                     <Button
                         className={className}
-                        style={{ borderColor: "white" }}
+                        type="text"
                         title={tooltip ? tooltip : text}
                         disabled={disabled || !onClick}
                         onClick={onClick}
@@ -77,8 +77,8 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = React.memo(props => {
                     :
                     <Button
                         className={className}
+                        type="text"
                         onClick={onClick}
-                        style={{ borderColor: "white" }}
                         title={tooltip ? tooltip : text}
                         disabled={disabled || !onClick}
                         icon={iconComponent}
@@ -102,7 +102,7 @@ const useStyles = makeGlobalChonkyStyles(theme => ({
         height: theme.toolbar.size,
         paddingBottom: important(0),
         paddingTop: important(0),
-        backgroundColor: important("#fff"),
+        backgroundColor: important(theme.palette.background.paper),
     },
     iconWithText: {
         marginRight: 8,

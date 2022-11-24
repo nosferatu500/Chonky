@@ -58,7 +58,7 @@ export const ToolbarDropdown: React.FC<ToolbarDropdownProps> = React.memo(props 
 
     return (
         <Dropdown menu={{ items: menuItemComponents }}>
-            <Button style={{ borderColor: "white" }}>
+            <Button type="text">
                 {name}
                 <DownOutlined />
             </Button>

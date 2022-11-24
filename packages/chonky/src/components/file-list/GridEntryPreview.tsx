@@ -52,22 +52,22 @@ export const GridEntryPreviewFolder: React.FC<FileEntryPreviewProps> = React.mem
 });
 GridEntryPreviewFolder.displayName = 'GridEntryPreviewFolder';
 
-const useFolderStyles = makeLocalChonkyStyles({
-    // @ts-ignore
+// @ts-ignore
+const useFolderStyles = makeLocalChonkyStyles(theme => ({
     previewFile: {
-        borderRadius: 5,
+        borderRadius: theme.gridFileEntry.borderRadius,
         position: 'relative',
         overflow: 'hidden',
     },
     folderBackSideTop: {
         backgroundColor: (state: FileEntryState) => state.color,
         boxShadow: (state: FileEntryState) => {
-            let color = 'rgba(255, 255, 255, 0.1)';
+            let color = theme.gridFileEntry.folderBackColorTint;
             if (state.focused) color = 'rgba(0, 0, 0, 0.3)';
             else if (state.selected) color = 'rgba(0, 153, 255, .4)';
             return `inset ${color} 0 0 0 999px`;
         },
-        borderTopLeftRadius: 5,
+        borderTopLeftRadius: theme.gridFileEntry.borderRadius,
         borderTopRightRadius: 10,
         position: 'absolute',
         right: '60%',
@@ -75,8 +75,8 @@ const useFolderStyles = makeLocalChonkyStyles({
         top: -10,
         left: 0,
         '&:after': {
-            borderRightColor: "#fff",
-            borderTopColor: "#fff",
+            borderRightColor: theme.palette.background.paper,
+            borderTopColor: theme.palette.background.paper,
             borderBottomColor: 'transparent',
             borderLeftColor: 'transparent',
             borderWidth: [0, 15, 10, 0],
@@ -91,12 +91,12 @@ const useFolderStyles = makeLocalChonkyStyles({
     folderBackSideMid: {
         backgroundColor: (state: FileEntryState) => state.color,
         boxShadow: (state: FileEntryState) => {
-            let color = 'rgba(255, 255, 255, 0.1)';
+            let color = theme.gridFileEntry.folderBackColorTint;
             if (state.focused) color = 'rgba(0, 0, 0, 0.3)';
             else if (state.selected) color = 'rgba(0, 153, 255, .4)';
             return `inset ${color} 0 0 0 999px`;
         },
-        borderTopRightRadius: 5,
+        borderTopRightRadius: theme.gridFileEntry.borderRadius,
         position: 'absolute',
         bottom: 0,
         right: 0,
@@ -108,11 +108,11 @@ const useFolderStyles = makeLocalChonkyStyles({
             const shadows: string[] = [];
             if (state.focused) shadows.push('inset rgba(0, 0, 0, 1) 0 0 0 3px');
             if (state.selected) shadows.push('inset rgba(0, 153, 255, .65) 0 0 0 3px');
-            shadows.push('inset rgba(255, 255, 255, 0.4) 0 0 0 999px');
+            shadows.push(`inset ${theme.gridFileEntry.folderFrontColorTint} 0 0 0 999px`);
             return shadows.join(', ');
         },
         backgroundColor: (state: FileEntryState) => state.color,
-        borderRadius: 5,
+        borderRadius: theme.gridFileEntry.borderRadius,
         position: 'absolute',
         overflow: 'hidden',
         bottom: 0,
@@ -121,9 +121,9 @@ const useFolderStyles = makeLocalChonkyStyles({
         top: 10,
     },
     fileIcon: {
-        fontSize: important("1.6em"),
+        fontSize: important(theme.gridFileEntry.childrenCountSize),
     },
-});
+}));
 
 export const GridEntryPreviewFile: React.FC<FileEntryPreviewProps> = React.memo(props => {
     const { className: externalClassName, entryState } = props;
@@ -147,34 +147,34 @@ export const GridEntryPreviewFile: React.FC<FileEntryPreviewProps> = React.memo(
 });
 GridEntryPreviewFile.displayName = 'GridEntryPreviewFile';
 
-const useFileStyles = makeLocalChonkyStyles({
-    // @ts-ignore
+// @ts-ignore
+const useFileStyles = makeLocalChonkyStyles(theme => ({
     previewFile: {
         boxShadow: (state: FileEntryState) => {
             const shadows: string[] = [];
             if (state.selected) shadows.push('inset rgba(0,153,255, .65) 0 0 0 3px');
             if (state.focused) shadows.push('inset rgba(0, 0, 0, 1) 0 0 0 3px');
-            shadows.push('inset rgba(255, 255, 255, 0.4) 0 0 0 999px');
+            shadows.push(`inset ${theme.gridFileEntry.fileColorTint} 0 0 0 999px`);
             return shadows.join(', ');
         },
         backgroundColor: (state: FileEntryState) => state.color,
-        borderRadius: 5,
+        borderRadius: theme.gridFileEntry.borderRadius,
         position: 'relative',
         overflow: 'hidden',
     },
     fileIcon: {
         transform: 'translateX(-50%) translateY(-50%)',
-        fontSize: '2.4em',
+        fontSize: theme.gridFileEntry.iconSize,
         opacity: (state: FileEntryState) => (state.thumbnailUrl && !state.focused ? 0 : 1),
         color: (state: FileEntryState) =>
-            state.focused ? '#000' : '#fff',
+            state.focused ? theme.gridFileEntry.iconColorFocused : theme.gridFileEntry.iconColor,
         position: 'absolute',
         left: '50%',
         zIndex: 12,
         top: '50%',
     },
     thumbnail: {
-        borderRadius: 5,
+        borderRadius: theme.gridFileEntry.borderRadius,
         position: 'absolute',
         zIndex: 6,
         bottom: 5,
@@ -182,7 +182,7 @@ const useFileStyles = makeLocalChonkyStyles({
         left: 5,
         top: 5,
     },
-});
+}));
 
 export const useCommonEntryStyles = makeLocalChonkyStyles({
     // @ts-ignore

@@ -37,9 +37,9 @@ export const GridEntry: React.FC<FileEntryProps> = React.memo(({ file, selected,
 });
 GridEntry.displayName = 'GridEntry';
 
-const useFileEntryStyles = makeLocalChonkyStyles({
+// @ts-ignore
+const useFileEntryStyles = makeLocalChonkyStyles(theme => ({
     gridFileEntry: {
-        // @ts-ignore
         flexDirection: 'column',
         display: 'flex',
         height: '100%',
@@ -48,7 +48,7 @@ const useFileEntryStyles = makeLocalChonkyStyles({
         flexGrow: 1,
     },
     gridFileEntryNameContainer: {
-        fontSize: 14,
+        fontSize: theme.gridFileEntry.fontSize,
         wordBreak: 'break-word',
         textAlign: 'center',
         paddingTop: 5,
@@ -59,4 +59,4 @@ const useFileEntryStyles = makeLocalChonkyStyles({
         borderRadius: 3,
         padding: [2, 4],
     },
-});
+}));

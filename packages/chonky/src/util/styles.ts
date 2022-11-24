@@ -74,6 +74,18 @@ export const darkThemeOverride: DeepPartial<ChonkyTheme> = {
         folderBackColorTint: 'rgba(50, 50, 50, 0.4)',
         folderFrontColorTint: 'rgba(50, 50, 50, 0.15)',
     },
+
+    palette: {
+        divider: "rgba(255, 255, 255, 0.12)",
+        text: {
+            primary: "#fff",
+            hint: "rgba(255, 255, 255, 0.7)",
+            disabled: "rgba(255, 255, 255c, 0.5)",
+        },
+        background: {
+            paper: "#121212",
+        },
+    }
 };
 
 export const getStripeGradient = (colorOne: string, colorTwo: string) =>

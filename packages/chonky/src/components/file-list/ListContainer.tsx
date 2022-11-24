@@ -73,9 +73,9 @@ export const ListContainer: React.FC<FileListListProps> = React.memo(props => {
     return listComponent;
 });
 
-const useStyles = makeLocalChonkyStyles({
-    // @ts-ignore
+// @ts-ignore
+const useStyles = makeLocalChonkyStyles(theme => ({
     listContainer: {
-        borderTop: 'solid 1px rgba(0, 0, 0, 0.12)',
+        borderTop: `solid 1px ${theme.palette.divider}`,
     },
-});
+}));

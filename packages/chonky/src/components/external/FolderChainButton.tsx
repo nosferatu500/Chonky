@@ -44,17 +44,17 @@ export const FolderChainButton: React.FC<FolderChainButtonProps> = React.memo(
     }
 );
 
-const useStyles = makeLocalChonkyStyles({
-    // @ts-ignore
+// @ts-ignore
+const useStyles = makeLocalChonkyStyles(theme => ({
     baseBreadcrumb: {
-        color: () => important("rgba(0, 0, 0, 0.87)"),
+        color: () => important(theme.palette.text.primary),
     },
     disabledBreadcrumb: {
         // Constant function here is on purpose. Without the function, the color here
         // does not override the `baseBreadcrumb` color from above.
-        color: () => important("rgba(0, 0, 0, 0.38)"),
+        color: () => important(theme.palette.text.disabled),
     },
     currentBreadcrumb: {
         textDecoration: important('underline'),
     },
-});
+}));

@@ -32,12 +32,12 @@ export const FileEntryName: React.FC<FileEntryNameProps> = React.memo(({ file, c
 });
 FileEntryName.displayName = 'FileEntryName';
 
-const useStyles = makeLocalChonkyStyles({
-    // @ts-ignore
+ // @ts-ignore
+const useStyles = makeLocalChonkyStyles(theme => ({
     modifierIcons: {
-        color: "rgba(0, 0, 0, 0.6)",
+        color: theme.palette.text.hint,
         position: 'relative',
         fontSize: '0.775em',
         paddingRight: 5,
     },
-});
+}));
