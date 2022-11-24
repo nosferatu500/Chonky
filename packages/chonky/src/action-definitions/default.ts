@@ -29,7 +29,7 @@ export const DefaultActions = {
      */
     EnableGridView: defineFileAction({
         id: 'enable_grid_view',
-        fileViewConfig: { mode: FileViewMode.Grid, entryWidth: 165, entryHeight: 130 },
+        fileViewConfig: { mode: FileViewMode.Grid, entryWidth: 140, entryHeight: 130 },
         button: {
             name: 'Switch to Grid view',
             toolbar: true,

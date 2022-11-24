@@ -32,7 +32,7 @@ export const getGridConfig = (
     fileCount: number,
     viewConfig: FileViewConfigGrid,
 ): GridConfig => {
-    const gutter = 8;
+    const gutter = 10;
     const scrollbar = 18;
 
     let columnWidth = viewConfig.entryWidth;
