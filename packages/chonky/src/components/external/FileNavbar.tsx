@@ -5,7 +5,8 @@
  */
 
 import { Row, Breadcrumb } from 'antd';
-import React, { ReactElement, useMemo } from 'react';
+import { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
+import React, { useMemo } from 'react';
 
 import { ChonkyActions } from '../../action-definitions/index';
 import { important, makeGlobalChonkyStyles } from '../../util/styles';
@@ -20,19 +21,18 @@ export const FileNavbar: React.FC<FileNavbarProps> = React.memo(() => {
     const folderChainItems = useFolderChainItems();
 
     const folderChainComponents = useMemo(() => {
-        const components: ReactElement[] = [];
+        const components: ItemType[] = [];
         for (let i = 0; i < folderChainItems.length; ++i) {
             const key = `folder-chain-${i}`;
-            const component = (
-                <Breadcrumb.Item key={key}>
-                    <FolderChainButton
-                        first={i === 0}
-                        current={i === folderChainItems.length - 1}
-                        item={folderChainItems[i]}
-                    />
-                </Breadcrumb.Item>
-            );
-            components.push(component);
+            const item = {
+                    key, 
+                    title: <FolderChainButton
+                                first={i === 0}
+                                current={i === folderChainItems.length - 1}
+                                item={folderChainItems[i]}
+                            />
+            };
+            components.push(item);
         }
         return components;
     }, [folderChainItems]);
@@ -40,9 +40,7 @@ export const FileNavbar: React.FC<FileNavbarProps> = React.memo(() => {
     return (
         <Row className={classes.navbarWrapper}>
             <SmartToolbarButton fileActionId={ChonkyActions.OpenParentFolder.id} />
-            <Breadcrumb className={classes.navbarBreadcrumbs}>
-                {folderChainComponents}
-            </Breadcrumb>
+            <Breadcrumb className={classes.navbarBreadcrumbs} items={folderChainComponents} />
         </Row>
     );
 });

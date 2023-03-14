@@ -18,6 +18,7 @@ import {
 import { ChonkyBusinessLogic } from '../internal/ChonkyBusinessLogic';
 import { ChonkyIconPlaceholder } from '../internal/ChonkyIconPlaceholder';
 import { ChonkyPresentationLayer } from '../internal/ChonkyPresentationLayer';
+import { ConfigProvider } from 'antd';
 
 // if (process.env.NODE_ENV === 'development') {
 //     const whyDidYouRender = require('@welldone-software/why-did-you-render');
@@ -53,17 +54,19 @@ export const FileBrowser = React.forwardRef<
     return (
         <ChonkyFormattersContext.Provider value={defaultFormatters}>
             <ReduxProvider store={store}>
-                <ThemeProvider theme={theme}>
-                    <ChonkyIconContext.Provider
-                        value={
-                            iconComponent ??
-                            defaultConfig.iconComponent ??
-                            ChonkyIconPlaceholder
-                        }
-                    >
-                        {chonkyComps}
-                    </ChonkyIconContext.Provider>
-                </ThemeProvider>
+                <ConfigProvider>
+                    <ThemeProvider theme={theme}>
+                        <ChonkyIconContext.Provider
+                            value={
+                                iconComponent ??
+                                defaultConfig.iconComponent ??
+                                ChonkyIconPlaceholder
+                            }
+                        >
+                            {chonkyComps}
+                        </ChonkyIconContext.Provider>
+                    </ThemeProvider>
+                </ConfigProvider>
             </ReduxProvider>
         </ChonkyFormattersContext.Provider>
     );

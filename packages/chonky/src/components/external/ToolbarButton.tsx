@@ -25,7 +25,7 @@ export interface ToolbarButtonProps {
     active?: boolean;
     icon?: Nullable<ChonkyIconName | string>;
     iconOnly?: boolean;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (event: React.MouseEvent<HTMLAnchorElement> & React.MouseEvent<HTMLButtonElement>) => void;
     disabled?: boolean;
     dropdown?: boolean;
 }
