@@ -30,5 +30,6 @@ const useStyles = makeGlobalChonkyStyles(() => ({
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'contain',
+        referrerPolicy: "no-referrer",
     },
 }));

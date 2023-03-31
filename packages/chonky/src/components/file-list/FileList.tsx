@@ -30,13 +30,13 @@ export const FileList: React.FC<FileListProps> = React.memo((props: FileListProp
     const fillParentContainer = true;
 
     const listRenderer = useCallback(
-        ({ width, height }: { width: number; height: number }) => {
+        (size: any) => {
             if (displayFileIds.length === 0) {
-                return <FileListEmpty width={width} height={viewConfig.entryHeight} />;
+                return <FileListEmpty width={size.width} height={viewConfig.entryHeight} />;
             } else if (viewConfig.mode === FileViewMode.List) {
-                return <ListContainer width={width} height={height + 150} />;
+                return <ListContainer width={size.width} height={size.height + 150} />;
             } else {
-                return <GridContainer width={width} height={height + 150} />;
+                return <GridContainer width={size.width} height={size.height + 150} />;
             }
         },
         [displayFileIds, viewConfig]
