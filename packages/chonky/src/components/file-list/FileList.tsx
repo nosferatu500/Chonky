@@ -1,6 +1,6 @@
 import React, { UIEvent, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import AutoSizer from 'react-virtualized-auto-sizer';
+import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 
 import { ChonkyActions } from '../../action-definitions/index';
 import { selectFileViewConfig, selectors } from '../../redux/selectors';
@@ -30,13 +30,13 @@ export const FileList: React.FC<FileListProps> = React.memo((props: FileListProp
     const fillParentContainer = true;
 
     const listRenderer = useCallback(
-        (size: any) => {
+        (size: Size) => {
             if (displayFileIds.length === 0) {
-                return <FileListEmpty width={size.width} height={viewConfig.entryHeight} />;
+                return <FileListEmpty width={size.width || 300} height={viewConfig.entryHeight} />;
             } else if (viewConfig.mode === FileViewMode.List) {
-                return <ListContainer width={size.width} height={size.height + 150} />;
+                return <ListContainer width={size.width || 300} height={(size.height || 300) + 150} />;
             } else {
-                return <GridContainer width={size.width} height={size.height + 150} />;
+                return <GridContainer width={size.width || 300} height={(size.height || 300) + 150} />;
             }
         },
         [displayFileIds, viewConfig]

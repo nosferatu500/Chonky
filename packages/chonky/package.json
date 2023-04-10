@@ -1,6 +1,6 @@
 {
   "name": "@nosferatu500/chonky",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "A File Browser component for React",
   "license": "MIT",
   "main": "dist/index.js",
@@ -31,15 +31,15 @@
   },
   "module": "dist/chonky.esm.js",
   "devDependencies": {
-    "@babel/core": "^7.21.3",
+    "@babel/core": "^7.21.4",
     "@testing-library/react": "^14.0.0",
     "@types/fuzzy-search": "^2.1.2",
-    "@types/react": "^18.0.31",
+    "@types/react": "^18.0.34",
     "@types/react-dom": "^18.0.11",
     "@types/react-virtualized-auto-sizer": "^1.0.1",
     "@types/react-window": "^1.8.5",
     "@types/redux-watch": "^1.1.0",
-    "antd": "^5.3.3",
+    "antd": "^5.4.0",
     "babel-loader": "^9.1.2",
     "classnames": "^2.3.2",
     "nanoid": "^4.0.2",
@@ -48,7 +48,7 @@
     "tsdef": "^0.0.14",
     "tsdx": "^0.14.1",
     "tslib": "^2.5.0",
-    "typescript": "^5.0.3"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -59,7 +59,7 @@
     "fuzzy-search": "^3.2.1",
     "react-jss": "^10.10.0",
     "react-redux": "^8.0.5",
-    "react-virtualized-auto-sizer": "^1.0.9",
+    "react-virtualized-auto-sizer": "^1.0.13",
     "react-window": "^1.8.8",
     "redux-watch": "^1.2.0"
   },
