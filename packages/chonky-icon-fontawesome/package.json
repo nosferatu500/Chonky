@@ -1,6 +1,6 @@
 {
   "name": "@nosferatu500/chonky-icon-fontawesome",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "FontAwesome icon component for Chonky file browser",
   "license": "MIT",
   "main": "dist/index.js",
