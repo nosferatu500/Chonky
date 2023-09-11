@@ -66,10 +66,4 @@ export class FileHelper {
         Logger.warn('Unsupported date representation:', maybeDate);
         return null;
     }
-
-    public static getChildrenCount(file: Nullable<FileData>): Nullable<number> {
-        if (!file || typeof file.childrenCount !== 'number') return null;
-
-        return file.childrenCount;
-    }
 }

@@ -1,9 +1,3 @@
-/**
- * @author Timur Kuzhagaliyev <tim.kuzh@gmail.com>
- * @copyright 2020
- * @license MIT
- */
-
 import { faGitAlt } from '@fortawesome/free-brands-svg-icons/faGitAlt';
 import { faLinux } from '@fortawesome/free-brands-svg-icons/faLinux';
 import { faNodeJs } from '@fortawesome/free-brands-svg-icons/faNodeJs';

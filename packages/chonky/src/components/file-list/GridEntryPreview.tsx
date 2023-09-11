@@ -1,9 +1,3 @@
-/**
- * @author Timur Kuzhagaliyev <tim.kuzh@gmail.com>
- * @copyright 2020
- * @license MIT
- */
-
 import React, { useContext } from 'react';
 import { Nullable } from 'tsdef';
 
@@ -13,7 +7,6 @@ import { c, important, makeLocalChonkyStyles } from '../../util/styles';
 import { FileThumbnail } from './FileThumbnail';
 
 export type FileEntryState = {
-    childrenCount: Nullable<number>;
     color: string;
     icon: ChonkyIconName | string;
     thumbnailUrl: Nullable<string>;
@@ -42,7 +35,6 @@ export const GridEntryPreviewFolder: React.FC<FileEntryPreviewProps> = React.mem
             <div className={folderClasses.folderBackSideMid}>
                 <div className={folderClasses.folderBackSideTop} />
                 <div className={folderClasses.folderFrontSide}>
-                    <div className={c([fileClasses.fileIcon, folderClasses.fileIcon])}>{entryState.childrenCount}</div>
                     <div className={commonClasses.selectionIndicator}></div>
                     <FileThumbnail className={fileClasses.thumbnail} thumbnailUrl={entryState.thumbnailUrl} />
                 </div>
@@ -119,9 +111,6 @@ const useFolderStyles = makeLocalChonkyStyles(theme => ({
         right: 0,
         left: 0,
         top: 10,
-    },
-    fileIcon: {
-        fontSize: important(theme.gridFileEntry.childrenCountSize),
     },
 }));
 

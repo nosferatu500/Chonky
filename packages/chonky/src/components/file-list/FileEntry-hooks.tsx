@@ -41,7 +41,6 @@ export const useFileEntryState = (file: Nullable<FileData>, selected: boolean, f
         const icon = thumbnailLoading ? ChonkyIconName.loading : iconData.icon;
 
         return {
-            childrenCount: FileHelper.getChildrenCount(file),
             icon: file && file.icon !== undefined ? file.icon : icon,
             iconSpin: iconSpin,
             thumbnailUrl: thumbnailUrl,

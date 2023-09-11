@@ -16,7 +16,6 @@ export interface FileData {
 
     size?: number; // File size in bytes
     modDate?: Date | string; // Last change date (or its string representation)
-    childrenCount?: number; // Number of files inside of a folder (only for folders)
 
     // Default preview overriding
     color?: string; // Color to use for this file

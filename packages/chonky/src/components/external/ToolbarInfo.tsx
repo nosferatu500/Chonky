@@ -1,9 +1,3 @@
-/**
- * @author Timur Kuzhagaliyev <tim.kuzh@gmail.com>
- * @copyright 2020
- * @license MIT
- */
-
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -12,7 +6,7 @@ import { Typography } from "antd"
 import { selectors } from '../../redux/selectors';
 import { important, makeGlobalChonkyStyles } from '../../util/styles';
 
-export interface ToolbarInfoProps {}
+export interface ToolbarInfoProps { }
 
 export const ToolbarInfo: React.FC<ToolbarInfoProps> = React.memo(() => {
     const classes = useStyles();

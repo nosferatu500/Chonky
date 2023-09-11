@@ -1,9 +1,3 @@
-/**
- * @author Timur Kuzhagaliyev <tim.kuzh@gmail.com>
- * @copyright 2020
- * @license MIT
- */
-
 import { Row, Breadcrumb } from 'antd';
 import { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
 import React, { useMemo } from 'react';

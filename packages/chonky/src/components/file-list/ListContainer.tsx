@@ -1,9 +1,3 @@
-/**
- * @author Timur Kuzhagaliyev <tim.kuzh@gmail.com>
- * @copyright 2020
- * @license MIT
- */
-
 import React, { CSSProperties, useCallback, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { FixedSizeList } from 'react-window';

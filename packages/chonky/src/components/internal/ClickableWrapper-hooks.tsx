@@ -1,9 +1,3 @@
-/**
- * @author Timur Kuzhagaliyev <tim.kuzh@gmail.com>
- * @copyright 2020
- * @license MIT
- */
-
 import React, { useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Nilable, Nullable } from 'tsdef';

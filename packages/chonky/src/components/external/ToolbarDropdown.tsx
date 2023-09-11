@@ -1,9 +1,3 @@
-/**
- * @author Timur Kuzhagaliyev <tim.kuzh@gmail.com>
- * @copyright 2020
- * @license MIT
- */
-
 import { DownOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Menu } from 'antd';
 import React, { useContext } from 'react';

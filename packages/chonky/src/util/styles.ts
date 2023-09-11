@@ -34,7 +34,6 @@ export const lightTheme = {
     },
 
     gridFileEntry: {
-        childrenCountSize: '1.6em',
         iconColorFocused: '#000',
         iconSize: '2.4em',
         iconColor: '#fff',

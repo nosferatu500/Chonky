@@ -1,9 +1,3 @@
-/**
- * @author Timur Kuzhagaliyev <tim.kuzh@gmail.com>
- * @copyright 2019
- * @license MIT
- */
-
 import { createContext, ElementType, useMemo } from 'react';
 
 import ExactTrie from 'exact-trie';
