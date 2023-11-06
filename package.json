@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^7.0.2"
+    "lerna": "^7.4.2"
   },
   "homepage": "https://chonky.io/",
   "author": {
