@@ -6,11 +6,11 @@ import { useParamSelector } from '../../redux/store';
 import { FileEntryProps } from '../../types/file-list.types';
 import { FileViewMode } from '../../types/file-view.types';
 import { FileHelper } from '../../util/file-helper';
-import { makeGlobalChonkyStyles } from '../../util/styles';
 import { ClickableWrapper, ClickableWrapperProps } from '../internal/ClickableWrapper';
 import { useFileClickHandlers } from './FileEntry-hooks';
 import { GridEntry } from './GridEntry';
 import { ListEntry } from './ListEntry';
+import { GlobalToken, theme } from 'antd';
 
 export interface SmartFileEntryProps {
     fileId: Nullable<string>;
@@ -19,7 +19,8 @@ export interface SmartFileEntryProps {
 }
 
 export const SmartFileEntry: React.FC<SmartFileEntryProps> = React.memo(({ fileId, displayIndex, fileViewMode }) => {
-    const classes = useStyles();
+    const { token } = theme.useToken();
+    const classes = makeStyles(token);
 
     // Basic properties
     const file = useParamSelector(selectFileData, fileId);
@@ -30,7 +31,7 @@ export const SmartFileEntry: React.FC<SmartFileEntryProps> = React.memo(({ fileI
     const [focused, setFocused] = useState(false);
     const clickableWrapperProps: ClickableWrapperProps = {
         wrapperTag: 'div',
-        passthroughProps: { className: classes.fileEntryClickableWrapper },
+        passthroughProps: { style: classes.fileEntryClickableWrapper },
         ...(FileHelper.isClickable(file) ? fileClickHandlers : undefined),
         setFocused,
     };
@@ -54,7 +55,7 @@ export const SmartFileEntry: React.FC<SmartFileEntryProps> = React.memo(({ fileI
 });
 SmartFileEntry.displayName = 'SmartFileEntry';
 
-const useStyles = makeGlobalChonkyStyles(() => ({
+const makeStyles = (_token: GlobalToken): Record<string, React.CSSProperties> => ({
     fileEntryClickableWrapper: {
         // We disable default browser outline because Chonky provides its own outline
         // (which doesn't compromise accessibility, hopefully)
@@ -62,4 +63,4 @@ const useStyles = makeGlobalChonkyStyles(() => ({
         position: 'relative',
         height: '100%',
     },
-}));
+});

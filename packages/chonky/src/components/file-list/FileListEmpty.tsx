@@ -2,7 +2,7 @@ import React, { CSSProperties, useContext } from 'react';
 
 import { ChonkyIconName } from '../../types/icons.types';
 import { ChonkyIconContext } from '../../util/icon-helper';
-import { makeGlobalChonkyStyles } from '../../util/styles';
+import { GlobalToken, theme } from 'antd';
 
 export interface FileListEmptyProps {
     width: number;
@@ -11,7 +11,8 @@ export interface FileListEmptyProps {
 
 export const FileListEmpty: React.FC<FileListEmptyProps> = props => {
     const { width, height } = props;
-    const classes = useStyles();
+    const { token } = theme.useToken();
+    const classes = makeStyles(token);
     const ChonkyIcon = useContext(ChonkyIconContext);
     const style: CSSProperties = {
         width,
@@ -19,8 +20,8 @@ export const FileListEmpty: React.FC<FileListEmptyProps> = props => {
     };
 
     return (
-        <div className={classes.fileListEmpty} style={style}>
-            <div className={classes.fileListEmptyContent}>
+        <div style={{...classes.fileListEmpty, ...style}}>
+            <div style={classes.fileListEmptyContent}>
                 <ChonkyIcon icon={ChonkyIconName.folderOpen} />
                 &nbsp; Nothing to show
             </div>
@@ -28,9 +29,9 @@ export const FileListEmpty: React.FC<FileListEmptyProps> = props => {
     );
 };
 
-const useStyles = makeGlobalChonkyStyles(theme => ({
+const makeStyles = (token: GlobalToken): Record<string, React.CSSProperties> => ({
     fileListEmpty: {
-        color: theme.palette.text.disabled,
+        color: token.colorTextDisabled,
         position: 'relative',
         textAlign: 'center',
         fontSize: '1.2em',
@@ -41,4 +42,4 @@ const useStyles = makeGlobalChonkyStyles(theme => ({
         left: '50%',
         top: '50%',
     },
-}));
+});

@@ -1,8 +1,7 @@
-import c from 'classnames';
 import React from 'react';
 import { Nullable } from 'tsdef';
 
-import { makeGlobalChonkyStyles } from '../../util/styles';
+import { GlobalToken, theme } from 'antd';
 
 export interface FileThumbnailProps {
     className: string;
@@ -14,16 +13,18 @@ export const FileThumbnail: React.FC<FileThumbnailProps> = React.memo(props => {
 
     const thumbnailStyle: React.CSSProperties = thumbnailUrl ? { backgroundImage: `url('${thumbnailUrl}')` } : {};
 
-    const classes = useStyles();
-    return <div className={c([className, classes.fileThumbnail])} style={thumbnailStyle} />;
+    const { token } = theme.useToken();
+    const classes = makeStyles(token);
+    return <div className={className} style={{...classes.fileThumbnail, ...thumbnailStyle}} />;
 });
 FileThumbnail.displayName = 'FileThumbnail';
 
-const useStyles = makeGlobalChonkyStyles(() => ({
+const makeStyles = (_token: GlobalToken): Record<string, React.CSSProperties> => ({
     fileThumbnail: {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'contain',
+        // @ts-ignore
         referrerPolicy: "no-referrer",
     },
-}));
+});
