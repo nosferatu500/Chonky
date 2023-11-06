@@ -1,30 +1,30 @@
-import { Card } from 'antd';
+import { Card, GlobalToken, theme } from 'antd';
 
 import React, { ReactNode } from 'react';
-import { makeGlobalChonkyStyles } from '../../util/styles';
 
 export interface ChonkyPresentationLayerProps { children?: ReactNode }
 
 export const ChonkyPresentationLayer: React.FC<ChonkyPresentationLayerProps> = ({
     children,
 }) => {
-    const classes = useStyles();
+    const { token } = theme.useToken();
+    const classes = makeStyles(token);
+
     return (
-        <Card className={classes.chonkyRoot}>
+        <Card style={classes.chonkyRoot}>
             {children ? children : null}
         </Card>
     );
 };
 
-const useStyles = makeGlobalChonkyStyles(theme => ({
+const makeStyles = (token: GlobalToken): Record<string, React.CSSProperties> => ({
     chonkyRoot: {
-        backgroundColor: theme.palette.background.paper,
-        border: `solid 1px ${theme.palette.divider}`,
+        backgroundColor: token.colorBgContainer,
+        border: `solid 1px ${token.colorBorderBg}`,
         padding: '0px',
-        fontSize: theme.fontSizes.rootPrimary,
-        color: theme.palette.text.primary,
+        fontSize: token.fontSize,
+        color: token.colorPrimary,
         touchAction: 'manipulation', // Disabling zoom on double tap
-        fontFamily: 'sans-serif',
         flexDirection: 'column',
         boxSizing: 'border-box',
         textAlign: 'left',
@@ -33,10 +33,7 @@ const useStyles = makeGlobalChonkyStyles(theme => ({
         height: '100%',
 
         // Disabling select
-        webkitTouchCallout: 'none',
-        webkitUserSelect: 'none',
-        mozUserSelect: 'none',
         msUserSelect: 'none',
         userSelect: 'none',
     },
-}));
+});

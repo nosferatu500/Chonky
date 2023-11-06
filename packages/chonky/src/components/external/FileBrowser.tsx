@@ -18,7 +18,7 @@ import {
 import { ChonkyBusinessLogic } from '../internal/ChonkyBusinessLogic';
 import { ChonkyIconPlaceholder } from '../internal/ChonkyIconPlaceholder';
 import { ChonkyPresentationLayer } from '../internal/ChonkyPresentationLayer';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, theme as antdTheme } from 'antd';
 
 // if (process.env.NODE_ENV === 'development') {
 //     const whyDidYouRender = require('@welldone-software/why-did-you-render');
@@ -54,7 +54,7 @@ export const FileBrowser = React.forwardRef<
     return (
         <ChonkyFormattersContext.Provider value={defaultFormatters}>
             <ReduxProvider store={store}>
-                <ConfigProvider>
+                <ConfigProvider theme={{ algorithm: darkMode ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm }}>
                     <ThemeProvider theme={theme}>
                         <ChonkyIconContext.Provider
                             value={
