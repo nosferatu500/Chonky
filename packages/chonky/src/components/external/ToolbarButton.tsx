@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, GlobalToken, theme } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
 import React, { useContext } from 'react';
@@ -10,7 +10,6 @@ import { ChonkyIconName } from '../../types/icons.types';
 import { CustomVisibilityState } from '../../types/action.types';
 import { useFileActionProps, useFileActionTrigger } from '../../util/file-actions';
 import { ChonkyIconContext } from '../../util/icon-helper';
-import { c, important, makeGlobalChonkyStyles } from '../../util/styles';
 
 export interface ToolbarButtonProps {
     className?: string;
@@ -36,41 +35,43 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = React.memo(props => {
         disabled,
         dropdown,
     } = props;
-    const classes = useStyles();
+    const { token } = theme.useToken();
+    const classes = makeStyles(token);
     const ChonkyIcon = useContext(ChonkyIconContext);
 
     const iconComponent =
         icon || iconOnly ? (
             <ChonkyIcon
-                className={classes.iconWithText}
+                style={classes.iconWithText}
                 icon={icon ? icon : ChonkyIconName.fallbackIcon}
                 fixedWidth={true}
             />
         ) : null;
 
-    const className = c({
-        [externalClassName ?? '']: true,
-        [classes.baseButton]: true,
-        [classes.iconOnlyButton]: iconOnly,
-        [classes.activeButton]: !!active,
-    });
+    const style = {
+        ...(typeof externalClassName === "object" ? externalClassName as any : {}),
+        ...classes.baseButton,
+        ...(iconOnly ? classes.iconOnlyButton : {}),
+        ...(!!active ? classes.activeButton : {}),
+    };
+
     return (
         <>
             {
                 dropdown ?
                     <Button
-                        className={className}
+                        style={style}
                         type="text"
                         title={tooltip ? tooltip : text}
                         disabled={disabled || !onClick}
                         onClick={onClick}
                     >
                         {text}
-                        <DownOutlined className={classes.iconDropdown} />
+                        <DownOutlined style={classes.iconDropdown} />
                     </Button>
                     :
                     <Button
-                        className={className}
+                        style={style}
                         type="text"
                         onClick={onClick}
                         title={tooltip ? tooltip : text}
@@ -86,24 +87,28 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = React.memo(props => {
     );
 });
 
-const useStyles = makeGlobalChonkyStyles(theme => ({
+const makeStyles = (token: GlobalToken): Record<string, React.CSSProperties> => ({
     baseButton: {
-        fontSize: important(theme.toolbar.fontSize),
-        textTransform: important('none'),
-        letterSpacing: important(0),
-        minWidth: important('auto'),
-        lineHeight: theme.toolbar.lineHeight,
-        height: theme.toolbar.size,
-        paddingBottom: important(0),
-        paddingTop: important(0),
-        backgroundColor: important(theme.palette.background.paper),
+        fontSize: token.fontSize,
+        textTransform: 'none',
+        letterSpacing: 0,
+        minWidth: 'auto',
+        lineHeight: token.lineHeight,
+        height: token.size,
+        paddingBottom: 0,
+        paddingTop: 0,
+        backgroundColor: token.colorBgBase,
     },
     iconWithText: {
         marginRight: 8,
     },
     iconOnlyButton: {
-        width: theme.toolbar.size,
+        width: token.size,
         textAlign: 'center',
+        marginTop: 5,
+        marginLeft: 5,
+        marginRight: 5,
+        fontSize: 17
     },
     iconDropdown: {
         fontSize: '0.7em',
@@ -111,9 +116,9 @@ const useStyles = makeGlobalChonkyStyles(theme => ({
         marginTop: 1,
     },
     activeButton: {
-        color: important(theme.colors.textActive),
+        color: token.colorPrimaryActive,
     },
-}));
+});
 
 export interface SmartToolbarButtonProps {
     fileActionId: string;

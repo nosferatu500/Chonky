@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Input } from "antd"
+import { GlobalToken, Input, theme } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 
 import { reduxActions } from '../../redux/reducers';
 import { selectSearchString } from '../../redux/selectors';
 import { useDebounce } from '../../util/hooks-helpers';
-import { makeGlobalChonkyStyles } from '../../util/styles';
 
 export interface ToolbarSearchProps { }
 
 export const ToolbarSearch: React.FC<ToolbarSearchProps> = React.memo(() => {
-    const classes = useStyles();
+    const { token } = theme.useToken();
+    const classes = makeStyles(token);
 
     const searchInputRef = useRef<HTMLInputElement>();
 
@@ -44,7 +44,7 @@ export const ToolbarSearch: React.FC<ToolbarSearchProps> = React.memo(() => {
     return (
         <Input
             size='small'
-            className={classes.searchFieldContainer}
+            style={classes.searchFieldContainer}
             placeholder="Search"
             prefix={<SearchOutlined />}
             value={localSearchString}
@@ -53,9 +53,9 @@ export const ToolbarSearch: React.FC<ToolbarSearchProps> = React.memo(() => {
     );
 });
 
-const useStyles = makeGlobalChonkyStyles(theme => ({
+const makeStyles = (token: GlobalToken): Record<string, React.CSSProperties> => ({
     searchFieldContainer: {
-        height: theme.toolbar.size,
+        height: token.sizeLG,
         width: 150,
     },
-}));
+});

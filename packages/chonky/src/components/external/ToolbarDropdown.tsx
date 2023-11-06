@@ -1,5 +1,5 @@
 import { DownOutlined } from '@ant-design/icons';
-import { Button, Dropdown, Menu } from 'antd';
+import { Button, Dropdown, GlobalToken, Menu, theme } from 'antd';
 import React, { useContext } from 'react';
 import { selectFileActionData } from '../../redux/selectors';
 import { useParamSelector } from '../../redux/store';
@@ -7,30 +7,21 @@ import { useParamSelector } from '../../redux/store';
 import { FileActionGroup } from '../../types/action-menus.types';
 import { useFileActionProps, useFileActionTrigger } from '../../util/file-actions';
 import { ChonkyIconContext } from '../../util/icon-helper';
-import { important, makeGlobalChonkyStyles } from '../../util/styles';
 
 export type ToolbarDropdownProps = FileActionGroup;
 
-const useStyles = makeGlobalChonkyStyles(theme => ({
-    baseButton: {
-        lineHeight: important(theme.toolbar.lineHeight),
-        height: important(theme.toolbar.size),
-        minHeight: important('auto'),
-        minWidth: important('auto'),
-    },
+const makeStyles = (token: GlobalToken): Record<string, React.CSSProperties> => ({
     icon: {
-        fontSize: important(theme.toolbar.fontSize),
-        minWidth: important('auto'),
-        color: important('inherit'),
+        fontSize: token.fontSize,
+        minWidth: 'auto',
+        color: 'inherit',
         marginRight: 8,
     },
-    activeButton: {
-        color: important(theme.colors.textActive),
-    },
-}));
+});
 
 const getMenuItem = (fileActionId: string) => {
-    const classes = useStyles();
+    const { token } = theme.useToken();
+    const classes = makeStyles(token);
     const ChonkyIcon = useContext(ChonkyIconContext);
 
     const triggerAction = useFileActionTrigger(fileActionId);
@@ -40,7 +31,7 @@ const getMenuItem = (fileActionId: string) => {
     return {
         label: action.button?.name || "",
         key: `menu-item-${fileActionId}`,
-        icon: icon && (<ChonkyIcon className={classes.icon} icon={icon} fixedWidth={true} />),
+        icon: icon && (<ChonkyIcon style={classes.icon} icon={icon} fixedWidth={true} />),
         onClick: triggerAction
     }
 }

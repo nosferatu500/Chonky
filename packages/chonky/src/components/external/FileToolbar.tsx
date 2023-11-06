@@ -2,16 +2,17 @@ import React, { ReactElement, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectToolbarItems } from '../../redux/selectors';
-import { makeGlobalChonkyStyles } from '../../util/styles';
 import { SmartToolbarButton } from './ToolbarButton';
 import { ToolbarDropdown } from './ToolbarDropdown';
 import { ToolbarInfo } from './ToolbarInfo';
 import { ToolbarSearch } from './ToolbarSearch';
+import { GlobalToken, theme } from 'antd';
 
 export interface FileToolbarProps {}
 
 export const FileToolbar: React.FC<FileToolbarProps> = React.memo(() => {
-    const classes = useStyles();
+    const { token } = theme.useToken();
+    const classes = makeStyles(token);
     const toolbarItems = useSelector(selectToolbarItems);
 
     const toolbarItemComponents = useMemo(() => {
@@ -36,19 +37,19 @@ export const FileToolbar: React.FC<FileToolbarProps> = React.memo(() => {
     }, [toolbarItems]);
 
     return (
-        <div className={classes.toolbarWrapper}>
-            <div className={classes.toolbarContainer}>
-                <div className={classes.toolbarLeft}>
+        <div style={classes.toolbarWrapper}>
+            <div style={classes.toolbarContainer}>
+                <div style={classes.toolbarLeft}>
                     <ToolbarSearch />
                     <ToolbarInfo />
                 </div>
-                <div className={classes.toolbarRight}>{toolbarItemComponents}</div>
+                <div style={classes.toolbarRight}>{toolbarItemComponents}</div>
             </div>
         </div>
     );
 });
 
-const useStyles = makeGlobalChonkyStyles(theme => ({
+const makeStyles = (token: GlobalToken): Record<string, React.CSSProperties> => ({
     toolbarWrapper: {},
     toolbarContainer: {
         flexWrap: 'wrap-reverse',
@@ -56,17 +57,14 @@ const useStyles = makeGlobalChonkyStyles(theme => ({
         marginBottom: "10px"
     },
     toolbarLeft: {
-        paddingBottom: theme.margins.rootLayoutMargin,
+        paddingBottom: token.margin,
         flexWrap: 'nowrap',
         flexGrow: 10000,
         display: 'flex',
-    },
-    toolbarLeftFiller: {
-        flexGrow: 10000,
     },
     toolbarRight: {
-        paddingBottom: theme.margins.rootLayoutMargin,
+        paddingBottom: token.margin,
         flexWrap: 'nowrap',
         display: 'flex',
     },
-}));
+});
