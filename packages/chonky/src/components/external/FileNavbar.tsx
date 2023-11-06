@@ -1,9 +1,8 @@
-import { Row, Breadcrumb } from 'antd';
+import { Row, Breadcrumb, GlobalToken, theme } from 'antd';
 import { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
 import React, { useMemo } from 'react';
 
 import { ChonkyActions } from '../../action-definitions/index';
-import { important, makeGlobalChonkyStyles } from '../../util/styles';
 import { useFolderChainItems } from './FileNavbar-hooks';
 import { FolderChainButton } from './FolderChainButton';
 import { SmartToolbarButton } from './ToolbarButton';
@@ -11,7 +10,8 @@ import { SmartToolbarButton } from './ToolbarButton';
 export interface FileNavbarProps { }
 
 export const FileNavbar: React.FC<FileNavbarProps> = React.memo(() => {
-    const classes = useStyles();
+    const { token } = theme.useToken();
+    const classes = makeStyles(token);
     const folderChainItems = useFolderChainItems();
 
     const folderChainComponents = useMemo(() => {
@@ -32,19 +32,19 @@ export const FileNavbar: React.FC<FileNavbarProps> = React.memo(() => {
     }, [folderChainItems]);
 
     return (
-        <Row className={classes.navbarWrapper}>
+        <Row style={classes.navbarWrapper}>
             <SmartToolbarButton fileActionId={ChonkyActions.OpenParentFolder.id} />
-            <Breadcrumb className={classes.navbarBreadcrumbs} items={folderChainComponents} />
+            <Breadcrumb style={classes.navbarBreadcrumbs} items={folderChainComponents} />
         </Row>
     );
 });
 
-const useStyles = makeGlobalChonkyStyles(theme => ({
+const makeStyles = (token: GlobalToken): Record<string, React.CSSProperties> => ({
     navbarWrapper: {
-        paddingBottom: theme.margins.rootLayoutMargin,
+        paddingBottom: token.margin,
     },
     navbarBreadcrumbs: {
-        fontSize: important(theme.toolbar.fontSize),
+        fontSize: token.fontSizeLG,
         flexGrow: 100,
     },
-}));
+});
