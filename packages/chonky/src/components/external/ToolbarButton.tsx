@@ -12,7 +12,7 @@ import { useFileActionProps, useFileActionTrigger } from '../../util/file-action
 import { ChonkyIconContext } from '../../util/icon-helper';
 
 export interface ToolbarButtonProps {
-    className?: string;
+    style?: React.CSSProperties;
     text: string;
     tooltip?: string;
     active?: boolean;
@@ -25,7 +25,7 @@ export interface ToolbarButtonProps {
 
 export const ToolbarButton: React.FC<ToolbarButtonProps> = React.memo(props => {
     const {
-        className: externalClassName,
+        style: externalStyle,
         text,
         tooltip,
         active,
@@ -48,7 +48,7 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = React.memo(props => {
         ) : null;
 
     const style = {
-        ...(typeof externalClassName === "object" ? externalClassName as any : {}),
+        ...externalStyle,
         ...classes.baseButton,
         ...(iconOnly ? classes.iconOnlyButton : {}),
         ...(!!active ? classes.activeButton : {}),

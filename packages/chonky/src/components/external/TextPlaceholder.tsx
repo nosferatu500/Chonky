@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { makeLocalChonkyStyles } from '../../util/styles';
+import { GlobalToken, theme } from 'antd';
 
 export interface TextPlaceholderProps {
     minLength: number;
@@ -16,27 +15,19 @@ export const TextPlaceholder: React.FC<TextPlaceholderProps> = React.memo(props 
     const placeholderLength = getRandomInt(minLength, maxLength);
     const whitespace = '&nbsp;'.repeat(placeholderLength);
 
-    const classes = useStyles();
+    const { token } = theme.useToken();
+    const classes = makeStyles(token);
+
     return (
         <span
-            className={classes.textPlaceholder}
+            style={classes.textPlaceholder}
             dangerouslySetInnerHTML={{ __html: whitespace }}
         />
     );
 });
 
-const useStyles = makeLocalChonkyStyles({
-    // @ts-ignore
-    '@keyframes loading-placeholder': {
-        '0%': { opacity: 0.2 },
-        '50%': { opacity: 0.4 },
-        '100%': { opacity: 0.2 },
-    },
+const makeStyles = (_token: GlobalToken): Record<string, React.CSSProperties> => ({
     textPlaceholder: {
-        animationName: '$loading-placeholder',
-        animationIterationCount: 'infinite',
-        animationTimingFunction: 'linear',
-        animationDuration: '1.5s',
         backgroundColor: '#ccc',
         whiteSpace: 'nowrap',
         overflow: 'hidden',

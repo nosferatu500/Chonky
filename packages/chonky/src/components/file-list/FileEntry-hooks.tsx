@@ -51,11 +51,11 @@ export const useFileEntryState = (file: Nullable<FileData>, selected: boolean, f
     }, [file, focused, iconData, selected, thumbnailLoading, thumbnailUrl]);
 };
 
-export const useFileNameComponent = (file: Nullable<FileData>, className: string) => {
+export const useFileNameComponent = (file: Nullable<FileData>, style: React.CSSProperties) => {
     return useMemo(() => {
         if (!file) return <TextPlaceholder minLength={15} maxLength={20} />;
 
-        return <Typography.Text className={className} ellipsis>{file.name}</Typography.Text>
+        return <Typography.Text style={style} ellipsis>{file.name}</Typography.Text>
     }, [file]);
 };
 

@@ -2,43 +2,40 @@ import React from 'react';
 
 import { FileEntryProps } from '../../types/file-list.types';
 import { FileHelper } from '../../util/file-helper';
-import { c, makeLocalChonkyStyles } from '../../util/styles';
 import { useFileEntryHtmlProps, useFileEntryState } from './FileEntry-hooks';
 import { FileEntryName } from './FileEntryName';
 import { FileEntryState, GridEntryPreviewFile, GridEntryPreviewFolder } from './GridEntryPreview';
+import { GlobalToken, theme } from 'antd';
 
 export const GridEntry: React.FC<FileEntryProps> = React.memo(({ file, selected, focused }) => {
     const isDirectory = FileHelper.isDirectory(file);
     const entryState = useFileEntryState(file, selected, focused);
 
-    const classes = useFileEntryStyles(entryState);
+    const { token } = theme.useToken();
+    const classes = makeStyles(token, entryState);
     const fileEntryHtmlProps = useFileEntryHtmlProps(file);
-    const entryClassName = c({
-        [classes.gridFileEntry]: true,
-    });
     return (
-        <div className={entryClassName} {...fileEntryHtmlProps}>
+        <div style={classes.gridFileEntry} {...fileEntryHtmlProps}>
             {isDirectory ? (
                 <GridEntryPreviewFolder
-                    className={classes.gridFileEntryPreview}
+                    style={classes.gridFileEntryPreview}
                     entryState={entryState}
                 />
             ) : (
                 <GridEntryPreviewFile
-                    className={classes.gridFileEntryPreview}
+                    style={classes.gridFileEntryPreview}
                     entryState={entryState}
                 />
             )}
-            <div className={classes.gridFileEntryNameContainer}>
-                <FileEntryName className={classes.gridFileEntryName} file={file} />
+            <div style={classes.gridFileEntryNameContainer}>
+                <FileEntryName style={classes.gridFileEntryName} file={file} />
             </div>
         </div>
     );
 });
 GridEntry.displayName = 'GridEntry';
 
-// @ts-ignore
-const useFileEntryStyles = makeLocalChonkyStyles(theme => ({
+const makeStyles = (token: GlobalToken, entryState: FileEntryState): Record<string, React.CSSProperties> => ({
     gridFileEntry: {
         flexDirection: 'column',
         display: 'flex',
@@ -48,15 +45,15 @@ const useFileEntryStyles = makeLocalChonkyStyles(theme => ({
         flexGrow: 1,
     },
     gridFileEntryNameContainer: {
-        fontSize: theme.gridFileEntry.fontSize,
+        fontSize: token.fontSize,
         wordBreak: 'break-word',
         textAlign: 'center',
         paddingTop: 5,
     },
     gridFileEntryName: {
-        backgroundColor: (state: FileEntryState) => (state.selected ? 'rgba(0,153,255, .25)' : 'transparent'),
-        textDecoration: (state: FileEntryState) => (state.focused ? 'underline' : 'none'),
+        backgroundColor: entryState.selected ? 'rgba(0,153,255, .25)' : 'transparent',
+        textDecoration: entryState.focused ? 'underline' : 'none',
         borderRadius: 3,
-        padding: [2, 4],
+        padding: "2px 4px",
     },
-}));
+});

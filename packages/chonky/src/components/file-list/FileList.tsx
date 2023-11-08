@@ -5,9 +5,6 @@ import AutoSizer, { Size } from 'react-virtualized-auto-sizer';
 import { ChonkyActions } from '../../action-definitions/index';
 import { selectFileViewConfig, selectors } from '../../redux/selectors';
 import { FileViewMode } from '../../types/file-view.types';
-import {
-    c, makeLocalChonkyStyles
-} from '../../util/styles';
 import { FileListEmpty } from './FileListEmpty';
 import { GridContainer } from './GridContainer';
 import { ListContainer } from './ListContainer';
@@ -21,7 +18,6 @@ export const FileList: React.FC<FileListProps> = React.memo((props: FileListProp
     const displayFileIds = useSelector(selectors.getDisplayFileIds);
     const viewConfig = useSelector(selectFileViewConfig);
 
-    const localClasses = useLocalStyles();
     const { token } = theme.useToken();
     const classes = makeStyles(token);
     const { onScroll } = props;
@@ -45,24 +41,20 @@ export const FileList: React.FC<FileListProps> = React.memo((props: FileListProp
     );
 
     return (
-        <div onScroll={onScroll} className={c([classes.fileListWrapper, localClasses.fileListWrapper])} role="list">
+        <div onScroll={onScroll} style={{...classes.fileListWrapper, ...classes.fileListWrapper2}} role="list">
             <AutoSizer disableHeight={!fillParentContainer}>{listRenderer}</AutoSizer>
         </div>
     );
 });
 FileList.displayName = 'FileList';
 
-const useLocalStyles = makeLocalChonkyStyles({
-    // @ts-ignore
-    fileListWrapper: {
-        minHeight: ChonkyActions.EnableGridView.fileViewConfig.entryHeight + 2,
-        background: () => 'none',
-    },
-});
-
 const makeStyles = (_token: GlobalToken): Record<string, React.CSSProperties> => ({
     fileListWrapper: {
         height: '100%',
         maxHeight: '100%',
+    },
+    fileListWrapper2: {
+        minHeight: ChonkyActions.EnableGridView.fileViewConfig.entryHeight + 2,
+        background: "none",
     },
 });

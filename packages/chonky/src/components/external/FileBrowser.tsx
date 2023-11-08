@@ -1,6 +1,4 @@
-import merge from 'deepmerge';
 import React, { ReactNode, useMemo } from 'react';
-import { ThemeProvider } from 'react-jss';
 import { Provider as ReduxProvider } from 'react-redux';
 import { nanoid } from 'nanoid';
 
@@ -11,10 +9,6 @@ import { getValueOrFallback } from '../../util/helpers';
 import { useStaticValue } from '../../util/hooks-helpers';
 import { ChonkyFormattersContext, defaultFormatters } from '../../util/i18n';
 import { ChonkyIconContext } from '../../util/icon-helper';
-import {
-    darkThemeOverride,
-    lightTheme,
-} from '../../util/styles';
 import { ChonkyBusinessLogic } from '../internal/ChonkyBusinessLogic';
 import { ChonkyIconPlaceholder } from '../internal/ChonkyIconPlaceholder';
 import { ChonkyPresentationLayer } from '../internal/ChonkyPresentationLayer';
@@ -40,10 +34,6 @@ export const FileBrowser = React.forwardRef<
     const chonkyInstanceId = useStaticValue(() => instanceId ?? nanoid());
     const store = useChonkyStore(chonkyInstanceId);
 
-    const theme = useMemo(() => {
-        return merge(lightTheme, darkMode ? darkThemeOverride : {});
-    }, [darkMode]);
-
     const chonkyComps = (
         <>
             <ChonkyBusinessLogic ref={ref} {...props} />
@@ -55,17 +45,15 @@ export const FileBrowser = React.forwardRef<
         <ChonkyFormattersContext.Provider value={defaultFormatters}>
             <ReduxProvider store={store}>
                 <ConfigProvider theme={{ algorithm: darkMode ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm }}>
-                    <ThemeProvider theme={theme}>
-                        <ChonkyIconContext.Provider
-                            value={
-                                iconComponent ??
-                                defaultConfig.iconComponent ??
-                                ChonkyIconPlaceholder
-                            }
-                        >
-                            {chonkyComps}
-                        </ChonkyIconContext.Provider>
-                    </ThemeProvider>
+                    <ChonkyIconContext.Provider
+                        value={
+                            iconComponent ??
+                            defaultConfig.iconComponent ??
+                            ChonkyIconPlaceholder
+                        }
+                    >
+                        {chonkyComps}
+                    </ChonkyIconContext.Provider>
                 </ConfigProvider>
             </ReduxProvider>
         </ChonkyFormattersContext.Provider>

@@ -3,14 +3,14 @@ import React, { useContext, useMemo } from 'react';
 import { FileEntryProps } from '../../types/file-list.types';
 import { useLocalizedFileEntryStrings } from '../../util/i18n';
 import { ChonkyIconContext } from '../../util/icon-helper';
-import { c, makeLocalChonkyStyles } from '../../util/styles';
 import { TextPlaceholder } from '../external/TextPlaceholder';
 import {
     useFileEntryHtmlProps,
     useFileEntryState,
 } from './FileEntry-hooks';
 import { FileEntryName } from './FileEntryName';
-import { FileEntryState, useCommonEntryStyles } from './GridEntryPreview';
+import { FileEntryState, makeStylesCommon } from './GridEntryPreview';
+import { GlobalToken, theme } from 'antd';
 
 interface StyleState {
     entryState: FileEntryState;
@@ -23,26 +23,19 @@ export const ListEntry: React.FC<FileEntryProps> = React.memo(
         const { fileModDateString, fileSizeString } = useLocalizedFileEntryStrings(
             file
         );
-        const styleState = useMemo<StyleState>(
-            () => ({
-                entryState,
-            }),
-            [entryState]
-        );
-        const classes = useStyles(styleState);
-        const commonClasses = useCommonEntryStyles(entryState);
+        
+        const { token } = theme.useToken();
+        const classes = makeStyles(token, entryState);
+        const commonClasses = makeStylesCommon(token, entryState);
         const ChonkyIcon = useContext(ChonkyIconContext);
         const fileEntryHtmlProps = useFileEntryHtmlProps(file);
         return (
-            <div className={classes.listFileEntry} {...fileEntryHtmlProps}>
-                <div className={commonClasses.focusIndicator}></div>
+            <div style={classes.listFileEntry} {...fileEntryHtmlProps}>
+                <div style={commonClasses.focusIndicator}></div>
                 <div
-                    className={c([
-                        commonClasses.selectionIndicator,
-                        classes.listFileEntrySelection,
-                    ])}
+                    style={classes.listFileEntrySelection}
                 ></div>
-                <div className={classes.listFileEntryIcon}>
+                <div style={classes.listFileEntryIcon}>
                     <ChonkyIcon
                         icon={entryState.icon}
                         spin={entryState.iconSpin}
@@ -50,19 +43,19 @@ export const ListEntry: React.FC<FileEntryProps> = React.memo(
                     />
                 </div>
                 <div
-                    className={classes.listFileEntryName}
+                    style={classes.listFileEntryName}
                     title={file ? file.name : undefined}
                 >
                     <FileEntryName file={file} />
                 </div>
-                <div className={classes.listFileEntryProperty}>
+                <div style={classes.listFileEntryProperty}>
                     {file ? (
                         fileModDateString ?? <span>—</span>
                     ) : (
                         <TextPlaceholder minLength={5} maxLength={15} />
                     )}
                 </div>
-                <div className={classes.listFileEntryProperty}>
+                <div style={classes.listFileEntryProperty}>
                     {file ? (
                         fileSizeString ?? <span>—</span>
                     ) : (
@@ -74,12 +67,11 @@ export const ListEntry: React.FC<FileEntryProps> = React.memo(
     }
 );
 
-// @ts-ignore
-const useStyles = makeLocalChonkyStyles(theme => ({
+const makeStyles = (token: GlobalToken, entryState: FileEntryState): Record<string, React.CSSProperties> => ({
     listFileEntry: {
-        boxShadow: `inset ${theme.palette.divider} 0 -1px 0`,
-        fontSize: theme.listFileEntry.fontSize,
-        color: () => 'inherit',
+        boxShadow: `inset ${token.colorTextDisabled} 0 -1px 0`,
+        fontSize: token.fontSize,
+        color: 'inherit',
         alignItems: 'center',
         position: 'relative',
         display: 'flex',
@@ -89,10 +81,10 @@ const useStyles = makeLocalChonkyStyles(theme => ({
         opacity: 0.6,
     },
     listFileEntryIcon: {
-        color: ({ entryState }: StyleState) => entryState.color,
-        fontSize: theme.listFileEntry.iconFontSize,
+        color: entryState.color,
+        fontSize: token.fontSizeLG,
         boxSizing: 'border-box',
-        padding: [2, 4],
+        padding: "2px 4px",
         zIndex: 20,
     },
     listFileEntryName: {
@@ -105,12 +97,12 @@ const useStyles = makeLocalChonkyStyles(theme => ({
         zIndex: 20,
     },
     listFileEntryProperty: {
-        fontSize: theme.listFileEntry.propertyFontSize,
+        fontSize: token.fontSize,
         boxSizing: 'border-box',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         flex: '0 1 150px',
-        padding: [2, 8],
+        padding: "2px 8px",
         zIndex: 20,
     },
-}));
+});
