@@ -23,7 +23,7 @@ const makeStyles = (token: GlobalToken): Record<string, React.CSSProperties> => 
         border: `solid 1px ${token.colorBorderBg}`,
         padding: '0px',
         fontSize: token.fontSize,
-        color: token.colorPrimary,
+        color: token.colorTextSecondary,
         touchAction: 'manipulation', // Disabling zoom on double tap
         flexDirection: 'column',
         boxSizing: 'border-box',

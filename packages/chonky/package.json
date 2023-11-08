@@ -1,6 +1,6 @@
 {
   "name": "@nosferatu500/chonky",
-  "version": "5.0.0-alpha.0",
+  "version": "5.0.0-alpha.1",
   "description": "A File Browser component for React",
   "license": "MIT",
   "main": "dist/index.js",

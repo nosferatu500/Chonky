@@ -96,7 +96,7 @@ const makeStyles = (token: GlobalToken): Record<string, React.CSSProperties> => 
         height: token.size,
         paddingBottom: 0,
         paddingTop: 0,
-        backgroundColor: token.colorBgBase,
+        backgroundColor: "transparent",
     },
     iconOnlyButton: {
         width: token.size,
