@@ -125,37 +125,6 @@ export const EssentialActions = {
         __payloadType: {} as OpenFilesPayload,
     } as const),
     /**
-     * Action that is triggered when user wants to go up a directory.
-     */
-    OpenParentFolder: defineFileAction(
-        {
-            id: 'open_parent_folder',
-            button: {
-                name: 'Go up a directory',
-                toolbar: true,
-                contextMenu: false,
-                icon: ChonkyIconName.openParentFolder,
-                iconOnly: true,
-            },
-        } as const,
-        ({ reduxDispatch, getReduxState }) => {
-            const parentFolder = selectParentFolder(getReduxState());
-            if (FileHelper.isOpenable(parentFolder)) {
-                reduxDispatch(
-                    thunkRequestFileAction(ChonkyActions.OpenFiles, {
-                        targetFile: parentFolder,
-                        files: [parentFolder],
-                    })
-                );
-            } else {
-                Logger.warn(
-                    'Open parent folder effect was triggered  even though the parent folder' +
-                        ' is not openable. This indicates a bug in presentation components.'
-                );
-            }
-        }
-    ),
-    /**
      * Action that is dispatched when user opens the context menu, either by right click
      * on something or using the context menu button on their keyboard.
      */

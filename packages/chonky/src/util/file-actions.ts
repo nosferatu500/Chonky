@@ -89,12 +89,6 @@ export const useFileActionProps = (
         
         let disabled: boolean = (!!action.requiresSelection && actionSelectionEmpty) || customDisabled;
 
-        if (action.id === ChonkyActions.OpenParentFolder.id) {
-            // We treat `open_parent_folder` file action as a special case as it
-            // requires the parent folder to be present to work...
-            disabled = disabled || !FileHelper.isOpenable(parentFolder);
-        }
-
         return { icon, active, disabled };
     }, [
         parentFolder,

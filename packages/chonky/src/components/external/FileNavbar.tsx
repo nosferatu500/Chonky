@@ -2,10 +2,8 @@ import { Row, Breadcrumb, GlobalToken, theme } from 'antd';
 import { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
 import React, { useMemo } from 'react';
 
-import { ChonkyActions } from '../../action-definitions/index';
 import { useFolderChainItems } from './FileNavbar-hooks';
 import { FolderChainButton } from './FolderChainButton';
-import { SmartToolbarButton } from './ToolbarButton';
 
 export interface FileNavbarProps { }
 
@@ -33,7 +31,6 @@ export const FileNavbar: React.FC<FileNavbarProps> = React.memo(() => {
 
     return (
         <Row style={classes.navbarWrapper}>
-            <SmartToolbarButton fileActionId={ChonkyActions.OpenParentFolder.id} />
             <Breadcrumb style={classes.navbarBreadcrumbs} items={folderChainComponents} />
         </Row>
     );

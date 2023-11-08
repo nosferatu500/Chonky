@@ -54,12 +54,6 @@ export const thunkUpdateRawFileActions = (
 };
 
 export const thunkUpdateToolbarNContextMenuItems = (fileActions: FileAction[]): ChonkyThunk => dispatch => {
-    const excludedToolbarFileActionIds = new Set<string>([
-        // TODO: Move decision to exclude actions somewhere else, as users' custom
-        //  components might not give these actions special treatment like Chonky does.
-        ChonkyActions.OpenParentFolder.id,
-    ]);
-
     type SeenGroupMap = { [groupName: string]: FileActionGroup };
 
     const toolbarItems: FileActionMenuItem[] = [];
@@ -80,7 +74,7 @@ export const thunkUpdateToolbarNContextMenuItems = (fileActions: FileAction[]): 
         const button = action.button;
         if (!button) continue;
 
-        if (button.toolbar && !excludedToolbarFileActionIds.has(action.id)) {
+        if (button.toolbar) {
             if (button.group) {
                 const group = getGroup(toolbarItems, seenToolbarGroups, button.group);
                 group.fileActionIds.push(action.id);

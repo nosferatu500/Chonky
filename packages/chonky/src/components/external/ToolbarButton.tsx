@@ -42,7 +42,6 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = React.memo(props => {
     const iconComponent =
         icon || iconOnly ? (
             <ChonkyIcon
-                style={classes.iconWithText}
                 icon={icon ? icon : ChonkyIconName.fallbackIcon}
                 fixedWidth={true}
             />
@@ -99,15 +98,10 @@ const makeStyles = (token: GlobalToken): Record<string, React.CSSProperties> => 
         paddingTop: 0,
         backgroundColor: token.colorBgBase,
     },
-    iconWithText: {
-        marginRight: 8,
-    },
     iconOnlyButton: {
         width: token.size,
         textAlign: 'center',
-        marginTop: 5,
-        marginLeft: 5,
-        marginRight: 5,
+        margin: 5,
         fontSize: 17
     },
     iconDropdown: {
